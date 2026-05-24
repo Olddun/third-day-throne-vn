@@ -222,6 +222,54 @@ const consequenceData = [
   ["最后晨光", "所有代价排成路", "下一步只剩亲手点亮结局"],
 ];
 
+const campaignDayTitles = [
+  "开笼余波",
+  "临时盟约",
+  "北门药车",
+  "账册初火",
+  "月相缺页",
+  "旧都来信",
+  "营地雪声",
+  "假令回潮",
+  "密室蜡封",
+  "王寝暗门",
+  "梦审初庭",
+  "将军让席",
+  "侍女开门",
+  "侍从钥匙",
+  "大臣反账",
+  "书记献忆",
+  "黑蜡试炼",
+  "猫印觉醒",
+  "王血疑云",
+  "白手礼署",
+  "第零空白",
+  "旧都雪路",
+  "北境望楼",
+  "毒茶证词",
+  "红账末页",
+  "金笼回声",
+  "黑日初升",
+  "双魂裂纹",
+  "晨议重排",
+  "终审前夜",
+];
+
+const campaignPhases = [
+  ["morning", "晨议", "稳住朝堂", "摄政派催判", "王座线前进"],
+  ["camp", "营地", "保护活证", "药车被拦", "证人线前进"],
+  ["ledger", "账册", "核对红账", "墨迹自燃", "财政线前进"],
+  ["bell", "银铃", "追问墙声", "铃舌断裂", "银铃线前进"],
+  ["court", "宫廷", "识别假令", "军印被仿", "北境线前进"],
+  ["bond", "亲密", "稳住她", "人形发冷", "亲密线前进"],
+  ["dream", "梦审", "取回缺忆", "火场逼近", "记忆线前进"],
+  ["letter", "密信", "拆未来信", "笔迹倒流", "周目线前进"],
+  ["ruin", "旧都", "确认旧名", "雪埋月门", "旧都线前进"],
+  ["mask", "面具", "逼出真话", "笑容裂开", "人物弧光前进"],
+  ["risk", "坏兆", "预演失败", "黑日压低", "坏结局暗号前进"],
+  ["hook", "夜钩", "留下目标", "钟声停住", "下一日钩子点亮"],
+];
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -550,6 +598,86 @@ const consequenceCorridorStory = Object.fromEntries(
       ],
     ];
   }),
+);
+
+const campaignCalendarStory = Object.fromEntries(
+  campaignDayTitles.flatMap((dayTitle, dayIndex) =>
+    campaignPhases.flatMap(([phaseId, phaseName, objective, pressure, reward], phaseIndex) => {
+      const day = String(dayIndex + 1).padStart(2, "0");
+      const nextPhase = campaignPhases[phaseIndex + 1]?.[0];
+      const nextDay = String(dayIndex + 2).padStart(2, "0");
+      const base = `campaign_${day}_${phaseId}`;
+      const next =
+        nextPhase
+          ? `campaign_${day}_${nextPhase}_goal`
+          : dayIndex + 1 < campaignDayTitles.length
+            ? `campaign_${nextDay}_morning_goal`
+            : "campaign_calendar_close";
+      return [
+        [
+          `${base}_goal`,
+          {
+            bg: phaseIndex % 4 === 0 ? "council" : phaseIndex % 4 === 1 ? "entrance" : phaseIndex % 4 === 2 ? "library" : "bed",
+            cg: `memoryCg${String(1 + ((dayIndex * campaignPhases.length + phaseIndex) % 59)).padStart(2, "0")}`,
+            cgMotion: phaseIndex % 2 === 0 ? "softOrder" : "moonCorridor",
+            speaker: "旁白",
+            text: `第${dayIndex + 1}日·${phaseName}：${objective}。`,
+            next: `${base}_pressure`,
+          },
+        ],
+        [
+          `${base}_pressure`,
+          {
+            speaker: "旁白",
+            text: `${dayTitle}的阻力：${pressure}。`,
+            next: `${base}_choice`,
+          },
+        ],
+        [
+          `${base}_choice`,
+          {
+            choices: [
+              { label: "问证人", hint: "拿活口", effects: { observation: 1 }, next: `${base}_witness` },
+              { label: "压证物", hint: "拿实证", effects: { vigilance: 1 }, next: `${base}_proof` },
+              { label: "护她", hint: "稳关系", effects: { closeness: 1 }, next: `${base}_guard` },
+            ],
+          },
+        ],
+        [
+          `${base}_witness`,
+          {
+            speaker: "塞德里克",
+            text: `${phaseName}先问活人，别让纸页替人说完。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_proof`,
+          {
+            speaker: "安塔莉亚",
+            text: `${phaseName}先压证物，谎言会怕光。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_guard`,
+          {
+            speaker: "旁白",
+            text: `${phaseName}先护住她，关系线立刻回暖。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_reward`,
+          {
+            speaker: "旁白",
+            text: `回报：${reward}。下一钩子写入谎言地图。`,
+            next,
+          },
+        ],
+      ];
+    }),
+  ),
 );
 
 const story = {
@@ -1294,6 +1422,24 @@ const story = {
   chapter_end: {
     speaker: "旁白",
     text: "长明灯的火光跳了一下。羊皮纸右下角的小字一闪而过：施术者亦可自我切割。",
+    next: "campaign_calendar_open",
+  },
+  campaign_calendar_open: {
+    chapter: "三十日战役",
+    bg: "council",
+    cg: "memoryCg01",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "从这一刻起，三十日被摊成战役日历。每天都有目标、阻力、回报和钩子。",
+    next: "campaign_01_morning_goal",
+  },
+  ...campaignCalendarStory,
+  campaign_calendar_close: {
+    bg: "library",
+    cg: "memoryCg30",
+    cgMotion: "libraryConfrontation",
+    speaker: "旁白",
+    text: "三十日战役日历合上。每一日都变成通往终局的线索。",
     next: "ch2_dawn",
   },
   ch2_dawn: {
@@ -3380,6 +3526,7 @@ const story = {
 
 const storySections = {
   "序章：献礼与开笼": ["throneGift", "catIntro", "softOrder", "openCage"],
+  "三十日战役：长篇日历": ["memoryCg01", "memoryCg12", "memoryCg24", "memoryCg30"],
   "第一章：早膳、救猫与议事厅": ["morningBreakfast", "saveCat", "councilSignal", "eveningFable"],
   "月圆夜：真身、禁书与对峙": ["moonCorridor", "humanReveal", "librarySpellbook", "libraryConfrontation"],
   "第二章：临时同盟与营地": ["truceLibrary", "refugeeCamp", "archiveLedger"],
@@ -3416,6 +3563,12 @@ const branchMap = [
     chapter: "第二章",
     title: "临时同盟",
     prompt: "这份同盟可以写成契约，也可以先从伸手开始。",
+  },
+  {
+    id: "campaign_01_morning_choice",
+    chapter: "三十日战役",
+    title: "战役日历",
+    prompt: "每日目标都要选择打法：问证人、压证物，或护住她。",
   },
   {
     id: "ch2_choice_archive",
