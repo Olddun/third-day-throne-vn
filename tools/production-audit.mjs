@@ -58,6 +58,15 @@ const branchNodes = reachableNodes.filter(([, node]) => node.choices?.length).le
 const endings = reachableNodes.filter(([, node]) => node.next === null && /结局|大结局/.test(node.text ?? ""));
 const reachableCg = new Set(reachableNodes.flatMap(([, node]) => (node.cg ? [node.cg] : [])));
 const minutes = Math.round((textChars / 350) * 10) / 10;
+const requiredMidpointNodes = [
+  "midpoint_false_victory",
+  "midpoint_choice_memory",
+  "midpoint_memory_room",
+  "midpoint_choice_blame",
+  "midpoint_public_hook",
+];
+const missingMidpointNodes = requiredMidpointNodes.filter((id) => !visited.has(id));
+const storyText = JSON.stringify(story);
 
 const report = {
   reachableNodes: visited.size,
@@ -70,11 +79,14 @@ const report = {
   reachableCg: reachableCg.size,
   actualCgAssets: Object.keys(assets.cg).length,
   plannedCg: longformPlan.cgPlan.length,
+  midpointReversalNodes: requiredMidpointNodes.length - missingMidpointNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
 if (branchNodes < 10) throw new Error(`Need 10+ actual branch nodes, found ${branchNodes}`);
 if (endings.length < 15) throw new Error(`Need 15+ reachable endings, found ${endings.length}`);
 if (longformPlan.cgPlan.length < 80) throw new Error(`Need 80+ planned CGs, found ${longformPlan.cgPlan.length}`);
+if (missingMidpointNodes.length) throw new Error(`Midpoint reversal nodes are not reachable: ${missingMidpointNodes.join(", ")}`);
+if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));
