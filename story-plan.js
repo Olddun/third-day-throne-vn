@@ -1,5 +1,23 @@
 const experienceDeck = [
   {
+    id: "modern_isekai_self_insert",
+    name: "现代人穿越代入",
+    role: "玩家先以现实视角进入异世界，再被塞进新王身体，降低代入门槛。",
+    timing: "开场第一幕",
+  },
+  {
+    id: "goddess_blessing_pick",
+    name: "女神外挂选择",
+    role: "开局立刻给回档、魔眼、修炼三种爽文权能，先让玩家获得主动权。",
+    timing: "穿越瞬间",
+  },
+  {
+    id: "overpowered_crown_fantasy",
+    name: "龙傲天王座爽点",
+    role: "现代常识和外挂能力压制旧贵族，让审判、战场和恋爱都服务玩家成长。",
+    timing: "全篇",
+  },
+  {
     id: "execution_clock",
     name: "倒计时处决",
     role: "开场三分钟内给玩家一个会死人、会失去证据的即时目标。",
@@ -32,7 +50,7 @@ const experienceDeck = [
   {
     id: "hero_identity_flip",
     name: "玩家身份翻转",
-    role: "前期以为自己是新王，中盘发现塞德里克也被切割过记忆。",
+    role: "前期知道自己是现代穿越者，中盘发现塞德里克身体也藏着被切割的旧人格。",
     timing: "中点反转",
   },
   {
@@ -165,12 +183,20 @@ const experienceDeck = [
 
 const characterArcs = [
   {
+    id: "player",
+    name: "现代玩家",
+    desire: "用外挂能力在异世界活下去，并把王座变成自己的爽文起点。",
+    wound: "现实里总被规则推着走，第一次拥有能改写局面的力量。",
+    mask: "用吐槽和爽文经验掩饰刚穿越的恐惧。",
+    arc: "从想靠外挂横推一切，到学会把每次胜利变成真正的责任。",
+  },
+  {
     id: "cedric",
     name: "塞德里克",
-    desire: "坐稳王座，查清先王留下的战争伪证。",
+    desire: "夺回身体旧记忆，确认现代灵魂会把王国带向哪里。",
     wound: "十六岁被迫学会用冷酷保命，并被切走一段关键记忆。",
-    mask: "把所有善意伪装成利用。",
-    arc: "从把人当棋子，到愿意让真相审判自己。",
+    mask: "把本能残响藏在现代玩家的决策背后。",
+    arc: "从残留人格，到愿意把王冠交给能承担责任的人。",
   },
   {
     id: "antalia",
@@ -310,6 +336,7 @@ const saveTheCatBeats = [
 ];
 
 const branchPoints = [
+  { id: "bp00_blessing", act: "穿越序章", question: "女神给的外挂，要回档、魔眼，还是修炼圣体？", options: ["回档王权", "全知魔眼", "修炼圣体"] },
   { id: "bp01_execution", act: "序章", question: "稳军心，还是保活口？", options: ["斩袭营者", "扣军令"] },
   { id: "bp02_proof", act: "第一章", question: "逼她暴露，还是暂时保护秘密？", options: ["逼她现形", "装作不知", "设铃试探"] },
   { id: "bp03_food", act: "第一章", question: "救战俘营，救王都粮仓，还是先抓内鬼？", options: ["开仓", "控粮", "钓饵"] },

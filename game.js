@@ -371,6 +371,11 @@ const assets = {
       angry: "./assets/characters/antalia_angry.png",
       soft: "./assets/characters/antalia_soft.png",
     },
+    goddess: {
+      guarded: "./assets/characters/antalia_guarded.png",
+      angry: "./assets/characters/antalia_angry.png",
+      soft: "./assets/characters/antalia_soft.png",
+    },
     cedric: {
       neutral: "./assets/characters/cedric_neutral.png",
       stern: "./assets/characters/cedric_stern.png",
@@ -437,6 +442,9 @@ const initialStats = {
   closeness: 0,
   vigilance: 0,
   observation: 0,
+  authority: 0,
+  mana: 0,
+  loop: 0,
 };
 
 const memoryTreeStory = Object.fromEntries(
@@ -1010,10 +1018,87 @@ const characterArcLedgerStory = Object.fromEntries(
 
 const story = {
   start: {
-    chapter: "序章",
+    chapter: "穿越序章",
+    bg: "bed",
+    cg: "memoryCg01",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "凌晨两点，你在出租屋里看完异世界小说，手机忽然弹出一行金字。",
+    next: "modern_last_train",
+  },
+  modern_last_train: {
+    speaker: "系统",
+    text: "是否接受异世界转生体验？提示：本次体验会直接覆盖现实肉身。",
+    next: "modern_click",
+  },
+  modern_click: {
+    speaker: "旁白",
+    text: "你以为那是广告，顺手点了确认。下一秒，地板消失，整座城市倒向星空。",
+    next: "goddess_gate",
+  },
+  goddess_gate: {
+    cg: "memoryCg02",
+    cgMotion: "libraryConfrontation",
+    speaker: "女神",
+    text: "女神俯视着你：现代人，欢迎来到艾尔斯王国。",
+    next: "goddess_terms",
+  },
+  goddess_terms: {
+    speaker: "女神",
+    text: "王国、猫族、处决令都已在等你。先选一个权能，别浪费我的奇迹。",
+    next: "choice_blessing",
+  },
+  choice_blessing: {
+    choices: [
+      {
+        label: "回档王权",
+        hint: "失败后保留记忆",
+        effects: { loop: 3, vigilance: 1 },
+        flags: { blessing: "loop" },
+        next: "blessing_loop",
+      },
+      {
+        label: "全知魔眼",
+        hint: "看穿谎言和弱点",
+        effects: { observation: 3, authority: 1 },
+        flags: { blessing: "eye" },
+        next: "blessing_eye",
+      },
+      {
+        label: "修炼圣体",
+        hint: "学什么都快",
+        effects: { mana: 3, closeness: 1 },
+        flags: { blessing: "body" },
+        next: "blessing_body",
+      },
+    ],
+  },
+  blessing_loop: {
+    speaker: "女神",
+    text: "你选择回档王权。死亡会痛，记忆会留，下一轮你会更强。",
+    next: "isekai_fall",
+  },
+  blessing_eye: {
+    speaker: "女神",
+    text: "你选择全知魔眼。谎言会发光，敌人的弱点会自己浮到眼前。",
+    next: "isekai_fall",
+  },
+  blessing_body: {
+    speaker: "女神",
+    text: "你选择修炼圣体。剑术、魔法、礼法都会变成能刷熟练度的东西。",
+    next: "isekai_fall",
+  },
+  isekai_fall: {
+    cg: "throneGift",
+    cgMotion: "throneGift",
+    speaker: "旁白",
+    text: "白光炸开。你睁眼时，黑色王冠压在额前，万人正等你下令。",
+    next: "isekai_body",
+  },
+  isekai_body: {
     bg: "throne",
     speaker: "旁白",
-    text: "圣历一七四年，灭国战争结束后的第三十日。王城广场上，三十七名猫族俘虏跪在雪里。",
+    text: "广场上，三十七名猫族俘虏跪在雪里，刑台已经架好。",
     next: "general_gift",
   },
   general_gift: {
@@ -1038,7 +1123,7 @@ const story = {
   cat_reveal: {
     sprite: "cat",
     speaker: "旁白",
-    text: "满殿臣子只看见一只猫。塞德里克却看见她把王印往身下藏了半寸。",
+    text: "满殿臣子只看见一只猫。你却看见她把王印往身下藏了半寸。",
     next: "cedric_first_line",
   },
   cedric_first_line: {
@@ -1048,12 +1133,12 @@ const story = {
   },
   inner_observe: {
     speaker: "塞德里克",
-    text: "这句话一出口，我就听见甲胄摩擦。将军不满，大臣松气，笼里的猫抬了眼。",
+    text: "这句话一出口，你听见甲胄摩擦。将军不满，大臣松气，猫抬了眼。",
     next: "opening_image",
   },
   opening_image: {
     speaker: "旁白",
-    text: "塞德里克坐在王座上。年轻国王的每一次犹豫，都会被人记成软弱。",
+    text: "你坐在塞德里克的王座上。每一次犹豫，都会被臣子记成软弱。",
     next: "cedric_mask",
   },
   cedric_mask: {
@@ -1110,7 +1195,7 @@ const story = {
   },
   mask_cost: {
     speaker: "旁白",
-    text: "此刻，玩家替塞德里克握住军令。落笔能稳住刀锋，停笔能保住活口。",
+    text: "此刻，你替这位新王握住军令。落笔稳住刀锋，停笔保住活口。",
     next: "mask_cost_b",
   },
   mask_cost_b: {
@@ -3926,10 +4011,16 @@ const storySections = {
 
 const branchMap = [
   {
+    id: "choice_blessing",
+    chapter: "穿越序章",
+    title: "女神选权能",
+    prompt: "现代人穿越前先选外挂：回档王权、全知魔眼，或修炼圣体。",
+  },
+  {
     id: "choice_throne",
     chapter: "序章",
     title: "刑台与王印",
-    prompt: "广场等着处决俘虏，笼中猫压着证物。塞德里克要稳军心，还是保住活口。",
+    prompt: "你刚穿进王座，广场等着处决俘虏。先稳军心，还是保住活口。",
   },
   {
     id: "choice_morning",
@@ -4105,6 +4196,7 @@ const musicMoods = {
 };
 
 const speakerActors = {
+  女神: "goddess",
   塞德里克: "cedric",
   安塔莉亚: "antalia",
   大将军: "general",
@@ -4117,6 +4209,7 @@ const speakerActors = {
 const actorNames = {
   cedric: "塞德里克",
   antalia: "安塔莉亚",
+  goddess: "女神",
   cat: "安塔莉亚",
   general: "大将军",
   minister: "大臣",
@@ -4128,6 +4221,7 @@ const actorNames = {
 const defaultExpressions = {
   cedric: "neutral",
   antalia: "guarded",
+  goddess: "soft",
   cat: "guarded",
   general: "proud",
   minister: "smile",
@@ -4545,8 +4639,8 @@ function renderNode() {
     setSkipMode(false);
     dom.stage.classList.add("has-choices");
     dom.speaker.classList.remove("hidden");
-    dom.speaker.textContent = "塞德里克";
-    dom.line.textContent = "塞德里克的选择。";
+    dom.speaker.textContent = state.node === "choice_blessing" ? "女神" : "塞德里克";
+    dom.line.textContent = state.node === "choice_blessing" ? "选择你的外挂。" : "你的选择。";
     renderChoices(node.choices);
     return;
   }
@@ -4715,7 +4809,9 @@ function continueManagedAdvance() {
 }
 
 function updateStats() {
-  dom.stats.textContent = `亲近 ${state.stats.closeness} · 警戒 ${state.stats.vigilance} · 观察 ${state.stats.observation}`;
+  dom.stats.textContent =
+    `亲近 ${state.stats.closeness} · 警戒 ${state.stats.vigilance} · 观察 ${state.stats.observation}` +
+    ` · 神权 ${state.stats.authority} · 魔力 ${state.stats.mana} · 回档 ${state.stats.loop}`;
 }
 
 function trimHistory() {
