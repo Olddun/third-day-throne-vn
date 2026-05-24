@@ -6,6 +6,7 @@
   "scripts": {
     "check": "node --check web/game.js && node --check web/story-plan.js && node --check test/smoke.mjs && node --check test/blueprint.mjs && node --check test/opening-hooks.mjs",
     "test": "node test/smoke.mjs && node test/blueprint.mjs && node test/opening-hooks.mjs",
+    "audit": "node tools/production-audit.mjs",
     "serve": "node tools/server.mjs"
   }
 }
