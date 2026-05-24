@@ -66,6 +66,16 @@ const requiredMidpointNodes = [
   "midpoint_public_hook",
 ];
 const missingMidpointNodes = requiredMidpointNodes.filter((id) => !visited.has(id));
+const requiredWolfNodes = [
+  "wolf_table_open",
+  "wolf_table_choice",
+  "wolf_accuse_rowan",
+  "wolf_accuse_viktor",
+  "wolf_accuse_luca",
+  "wolf_accuse_scribe",
+  "wolf_table_new_goal",
+];
+const missingWolfNodes = requiredWolfNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -80,6 +90,7 @@ const report = {
   actualCgAssets: Object.keys(assets.cg).length,
   plannedCg: longformPlan.cgPlan.length,
   midpointReversalNodes: requiredMidpointNodes.length - missingMidpointNodes.length,
+  closedCourtNodes: requiredWolfNodes.length - missingWolfNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -87,6 +98,7 @@ if (branchNodes < 10) throw new Error(`Need 10+ actual branch nodes, found ${bra
 if (endings.length < 15) throw new Error(`Need 15+ reachable endings, found ${endings.length}`);
 if (longformPlan.cgPlan.length < 80) throw new Error(`Need 80+ planned CGs, found ${longformPlan.cgPlan.length}`);
 if (missingMidpointNodes.length) throw new Error(`Midpoint reversal nodes are not reachable: ${missingMidpointNodes.join(", ")}`);
+if (missingWolfNodes.length) throw new Error(`Closed court suspicion nodes are not reachable: ${missingWolfNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));
