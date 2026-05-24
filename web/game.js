@@ -69,6 +69,33 @@ const memoryCgAssets = Object.fromEntries(
   }),
 );
 
+const trialRoundData = [
+  ["孩子旧名", "贵族把名字改成家仆编号", "第一名孩子敢抬头"],
+  ["药车轮痕", "守卫说药车从未进宫", "石缝里留下白花粉"],
+  ["北门假令", "军官把笔迹推给死人", "罗温承认调兵缺口"],
+  ["第四蜡封", "礼官说密室只有三枚印", "第四枚印来自旧祷堂"],
+  ["墙中银铃", "大臣笑称铃声是幻听", "墙后传来三短一长"],
+  ["卢卡钥匙", "侍从被逼承认偷门", "钥匙齿缝有黑香灰"],
+  ["米拉侧门", "贵族质疑侍女证词", "侧门名册少了两页"],
+  ["书记旧伤", "书记官开始忘字", "月相伤口对上零周目"],
+  ["红账末页", "末页只剩半行墨", "礼署名字浮出纸背"],
+  ["白手套", "礼官称手套早已焚毁", "灰里藏着银线扣"],
+  ["黑蜡证物", "黑蜡在日光下融化", "融痕指向王寝暗门"],
+  ["人形证词", "敌人逼她靠近王印", "她站稳后念出本名"],
+  ["幼王戒痕", "旧臣说戒指只是遗物", "戒内刻着切魂日期"],
+  ["北境军誓", "军方想用忠诚盖过罪", "誓词里漏掉撤军夜"],
+  ["大臣账术", "他把屠城写成亏空", "每笔亏空都有活人名"],
+  ["猫族俘虏", "旁听席开始骚动", "俘虏依次说出故乡"],
+  ["死者证词", "对方称死人无法作证", "记忆树亮起死者坐席"],
+  ["未来来信", "密信被指控伪造", "笔迹在王印下倒流"],
+  ["第零日期", "历法官拒认空白日", "月相表自己补上缺口"],
+  ["王座锁孔", "摄政会想提前合议", "锁孔只认两份名字"],
+  ["面包小猫", "全场因小猫发笑", "笑声停在它爪下血印"],
+  ["沉默金笼", "旧贵族献上新笼", "笼门反照出旧王手影"],
+  ["黑日边缘", "天窗墨迹遮住日光", "白手套影子站到殿后"],
+  ["终审顺序", "所有证据争着先上台", "谎言地图排出最后路"],
+];
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -170,6 +197,81 @@ const memoryTreeStory = Object.fromEntries(
         text: `记忆树第${index + 1}枚叶片亮起：${title}。这并非回忆，是明日审判的伏笔。`,
         next: index + 1 < memoryCgTitles.length ? `memory_tree_${nextNumber}` : "memory_tree_close",
       },
+    ];
+  }),
+);
+
+const trialGauntletStory = Object.fromEntries(
+  trialRoundData.flatMap(([title, resistance, reward], index) => {
+    const number = String(index + 1).padStart(2, "0");
+    const nextNumber = String(index + 2).padStart(2, "0");
+    const base = `trial_round_${number}`;
+    const nextRound = index + 1 < trialRoundData.length ? `trial_round_${nextNumber}_goal` : "trial_gauntlet_close";
+    const bg = index % 3 === 0 ? "council" : index % 3 === 1 ? "library" : "entrance";
+    const cg = `memoryCg${String(30 + (index % 30)).padStart(2, "0")}`;
+    const mood = index % 2 === 0 ? "libraryConfrontation" : "softOrder";
+    return [
+      [
+        `${base}_goal`,
+        {
+          bg,
+          cg,
+          cgMotion: mood,
+          speaker: "旁白",
+          text: `第${index + 1}轮审判：${title}。目标，把这条线索送上台。`,
+          next: `${base}_resist`,
+        },
+      ],
+      [
+        `${base}_resist`,
+        {
+          speaker: index % 4 === 0 ? "大臣" : index % 4 === 1 ? "大将军" : index % 4 === 2 ? "老书记官" : "旁白",
+          text: resistance,
+          next: `${base}_choice`,
+        },
+      ],
+      [
+        `${base}_choice`,
+        {
+          choices: [
+            { label: "追名字", hint: "逼人开口", effects: { observation: 1 }, next: `${base}_name` },
+            { label: "压证物", hint: "先上实物", effects: { vigilance: 1 }, next: `${base}_proof` },
+            { label: "护证人", hint: "保住活口", effects: { closeness: 1 }, next: `${base}_guard` },
+          ],
+        },
+      ],
+      [
+        `${base}_name`,
+        {
+          speaker: "塞德里克",
+          text: `先念名字。${title}若有主人，就让主人站出来。`,
+          next: `${base}_reward`,
+        },
+      ],
+      [
+        `${base}_proof`,
+        {
+          speaker: "安塔莉亚",
+          text: `把证物放到光下。${title}经得起所有人看。`,
+          next: `${base}_reward`,
+        },
+      ],
+      [
+        `${base}_guard`,
+        {
+          speaker: "旁白",
+          text: `证人被护到台阶内侧。${title}终于有了能说话的人。`,
+          next: `${base}_reward`,
+        },
+      ],
+      [
+        `${base}_reward`,
+        {
+          speaker: "旁白",
+          text: `${reward}。谎言地图亮起下一枚钉子。`,
+          next: nextRound,
+        },
+      ],
     ];
   }),
 );
@@ -2473,6 +2575,24 @@ const story = {
     cgMotion: "softOrder",
     speaker: "旁白",
     text: "失去王位后，塞德里克第一次走在王冠前面。门内所有人都回头。",
+    next: "trial_gauntlet_open",
+  },
+  trial_gauntlet_open: {
+    chapter: "第九章",
+    bg: "council",
+    cg: "memoryCg30",
+    cgMotion: "libraryConfrontation",
+    speaker: "旁白",
+    text: "公开审判开始。每轮攻防只有一件事：让谎言失去落脚处。",
+    next: "trial_round_01_goal",
+  },
+  ...trialGauntletStory,
+  trial_gauntlet_close: {
+    bg: "council",
+    cg: "memoryCg53",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "二十四轮攻防结束，审判厅安静下来。真凶终于没有旁枝可躲。",
     next: "ch5_public_truth",
   },
   ch5_public_truth: {
@@ -2954,6 +3074,7 @@ const storySections = {
   "第三章：旧王都与真相": ["oldCapitalRuins", "altarMemory", "palaceCoup"],
   "第八章：审判前夜潜入": ["refugeeCamp", "archiveLedger", "councilSignal", "infirmaryAftermath"],
   "第九章：失位与崩解": ["palaceCoup", "infirmaryAftermath", "memoryCg40", "memoryCg59"],
+  "第九章：公开审判攻防": ["memoryCg30", "memoryCg41", "memoryCg53"],
   "终章：政变、破咒与自由": ["infirmaryAftermath", "finalRitual", "sunriseEnding"],
 };
 
@@ -3035,6 +3156,12 @@ const branchMap = [
     chapter: "第九章",
     title: "入庭时刻",
     prompt: "证据、人形和时间同时崩坏，他决定怎样走进审判厅。",
+  },
+  {
+    id: "trial_round_01_choice",
+    chapter: "第九章",
+    title: "审判攻防",
+    prompt: "每轮证据都要选打法：追名字、压证物，或护住证人。",
   },
   {
     id: "ch5_choice_end",

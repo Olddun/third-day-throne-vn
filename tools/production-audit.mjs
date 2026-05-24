@@ -124,6 +124,16 @@ const requiredCollapseNodes = [
   "collapse_enter_join",
 ];
 const missingCollapseNodes = requiredCollapseNodes.filter((id) => !visited.has(id));
+const requiredTrialGauntletNodes = [
+  "trial_gauntlet_open",
+  "trial_round_01_goal",
+  "trial_round_01_choice",
+  "trial_round_08_reward",
+  "trial_round_16_reward",
+  "trial_round_24_choice",
+  "trial_gauntlet_close",
+];
+const missingTrialGauntletNodes = requiredTrialGauntletNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -143,6 +153,7 @@ const report = {
   badEndingIntelNodes: requiredBadIntelNodes.length - missingBadIntelNodes.length,
   trialEveNodes: requiredTrialEveNodes.length - missingTrialEveNodes.length,
   collapseNodes: requiredCollapseNodes.length - missingCollapseNodes.length,
+  trialGauntletNodes: requiredTrialGauntletNodes.length - missingTrialGauntletNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -157,6 +168,7 @@ if (missingLieMapNodes.length) throw new Error(`Lie map nodes are not reachable:
 if (missingBadIntelNodes.length) throw new Error(`Bad ending intel nodes are not reachable: ${missingBadIntelNodes.join(", ")}`);
 if (missingTrialEveNodes.length) throw new Error(`Trial eve nodes are not reachable: ${missingTrialEveNodes.join(", ")}`);
 if (missingCollapseNodes.length) throw new Error(`Collapse nodes are not reachable: ${missingCollapseNodes.join(", ")}`);
+if (missingTrialGauntletNodes.length) throw new Error(`Trial gauntlet nodes are not reachable: ${missingTrialGauntletNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));
