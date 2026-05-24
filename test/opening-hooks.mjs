@@ -84,6 +84,19 @@ if (throneOpening.choiceId !== "choice_throne") {
   throw new Error(`Second player decision should be choice_throne, got ${throneOpening.choiceId}`);
 }
 
+const trainingOpening = collectUntilChoice("isekai_training_open");
+const trainingText = trainingOpening.texts.join("\n");
+for (const hook of ["死亡回档", "疼痛", "攻略", "爽点"]) {
+  if (!trainingText.includes(hook)) throw new Error(`Isekai tutorial lacks growth hook: ${hook}`);
+}
+if (trainingOpening.choiceId !== "isekai_training_01_loop_choice") {
+  throw new Error(`Tutorial should reach training choice, got ${trainingOpening.choiceId}`);
+}
+const trainingChoices = story.isekai_training_01_loop_choice.choices.map((choice) => choice.label).join("/");
+if (trainingChoices !== "读回档/练魔力/压贵族") {
+  throw new Error(`Training choices lost loop/growth framing: ${trainingChoices}`);
+}
+
 const throneChoices = story.choice_throne.choices.map((choice) => choice.label);
 if (throneChoices.join("/") !== "斩袭营者/扣军令") {
   throw new Error(`First choice labels lost dilemma framing: ${throneChoices.join("/")}`);

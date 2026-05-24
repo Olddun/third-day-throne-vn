@@ -65,6 +65,11 @@ const requiredIsekaiNodes = [
   "blessing_loop",
   "blessing_eye",
   "blessing_body",
+  "isekai_training_open",
+  "isekai_training_01_loop_choice",
+  "isekai_training_06_craft_reward",
+  "isekai_training_12_oath_choice",
+  "isekai_training_close",
   "isekai_fall",
   "choice_throne",
 ];

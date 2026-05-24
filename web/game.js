@@ -352,6 +352,21 @@ const arcBeats = [
   ["payoff", "回报", "兑现人物回报", "黑蜡索要姓名", "弧光线进入终局"],
 ];
 
+const isekaiTrainingBeats = [
+  ["loop", "死亡回档", "先试一次死亡边界", "疼痛完整留下", "回档记忆变成攻略"],
+  ["mana", "魔力入门", "把魔力当肌肉练", "王冠偷走呼吸", "魔力上限立刻抬升"],
+  ["sword", "剑术速成", "用现代训练拆剑路", "大将军下手极重", "剑术熟练度暴涨"],
+  ["court", "贵族压制", "用魔眼拆穿谎言", "大臣连换三套说法", "朝堂威望当场上涨"],
+  ["cat", "猫王女羁绊", "先救她的族人", "她仍把你当敌王", "信任裂缝露出暖光"],
+  ["craft", "现代知识", "改造王都粮仓", "旧贵族嘲笑异端", "民心和财政同时回升"],
+  ["spell", "咏唱破格", "把魔法拆成公式", "书记官听到禁名", "禁书库权限打开"],
+  ["party", "队伍成形", "收服第一批盟友", "每个人都要筹码", "主角团开始听令"],
+  ["duel", "越级决斗", "公开打穿军官", "失败会回到钟响前", "龙傲天名声炸开"],
+  ["night", "夜间补课", "让安塔莉亚教古语", "耳朵和尾巴都警惕", "亲密线开始升温"],
+  ["loop2", "二次回档", "保留失败情报", "黑日提前看见你", "敌方剧本被你撕开"],
+  ["oath", "王座宣言", "把外挂变成王令", "全场等你露怯", "现代人正式接管王座"],
+];
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -1016,6 +1031,78 @@ const characterArcLedgerStory = Object.fromEntries(
   ),
 );
 
+const isekaiTrainingStory = Object.fromEntries(
+  isekaiTrainingBeats.flatMap(([beatId, beatName, objective, pressure, reward], index) => {
+    const number = String(index + 1).padStart(2, "0");
+    const nextNumber = String(index + 2).padStart(2, "0");
+    const base = `isekai_training_${number}_${beatId}`;
+    const next = index + 1 < isekaiTrainingBeats.length ? `isekai_training_${nextNumber}_${isekaiTrainingBeats[index + 1][0]}_goal` : "isekai_training_close";
+    return [
+      [
+        `${base}_goal`,
+        {
+          bg: index % 4 === 0 ? "bed" : index % 4 === 1 ? "library" : index % 4 === 2 ? "council" : "throne",
+          cg: `memoryCg${String(3 + index).padStart(2, "0")}`,
+          cgMotion: index % 3 === 0 ? "softOrder" : index % 3 === 1 ? "libraryConfrontation" : "moonCorridor",
+          speaker: "旁白",
+          text: `异世界教程${index + 1}：${beatName}。${objective}。`,
+          next: `${base}_pressure`,
+        },
+      ],
+      [
+        `${base}_pressure`,
+        {
+          speaker: "旁白",
+          text: `阻力：${pressure}。外挂也要付学费。`,
+          next: `${base}_choice`,
+        },
+      ],
+      [
+        `${base}_choice`,
+        {
+          choices: [
+            { label: "读回档", hint: "保留情报", effects: { loop: 1, observation: 1 }, next: `${base}_loop` },
+            { label: "练魔力", hint: "提高上限", effects: { mana: 1, closeness: 1 }, next: `${base}_mana` },
+            { label: "压贵族", hint: "打出威望", effects: { authority: 1, vigilance: 1 }, next: `${base}_crown` },
+          ],
+        },
+      ],
+      [
+        `${base}_loop`,
+        {
+          speaker: "塞德里克",
+          text: `${beatName}先读回档。失败情报在脑内排成攻略。`,
+          next: `${base}_reward`,
+        },
+      ],
+      [
+        `${base}_mana`,
+        {
+          speaker: "塞德里克",
+          text: `${beatName}先练魔力。身体像刚升一级一样发热。`,
+          next: `${base}_reward`,
+        },
+      ],
+      [
+        `${base}_crown`,
+        {
+          speaker: "塞德里克",
+          text: `${beatName}先压贵族。王座第一次像你的装备。`,
+          next: `${base}_reward`,
+        },
+      ],
+      [
+        `${base}_reward`,
+        {
+          speaker: "旁白",
+          text: `回报：${reward}。下一段爽点已经亮起。`,
+          next,
+        },
+      ],
+    ];
+  }),
+);
+
 const story = {
   start: {
     chapter: "穿越序章",
@@ -1076,16 +1163,34 @@ const story = {
   blessing_loop: {
     speaker: "女神",
     text: "你选择回档王权。死亡会痛，记忆会留，下一轮你会更强。",
-    next: "isekai_fall",
+    next: "isekai_training_open",
   },
   blessing_eye: {
     speaker: "女神",
     text: "你选择全知魔眼。谎言会发光，敌人的弱点会自己浮到眼前。",
-    next: "isekai_fall",
+    next: "isekai_training_open",
   },
   blessing_body: {
     speaker: "女神",
     text: "你选择修炼圣体。剑术、魔法、礼法都会变成能刷熟练度的东西。",
+    next: "isekai_training_open",
+  },
+  isekai_training_open: {
+    chapter: "异世界教程",
+    bg: "bed",
+    cg: "memoryCg03",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "女神把十二枚攻略光标塞进脑内。爽点从练级开始。",
+    next: "isekai_training_01_loop_goal",
+  },
+  ...isekaiTrainingStory,
+  isekai_training_close: {
+    bg: "throne",
+    cg: "memoryCg15",
+    cgMotion: "libraryConfrontation",
+    speaker: "旁白",
+    text: "十二段教程结束。你带着回档、魔力和王权经验坠入王座。",
     next: "isekai_fall",
   },
   isekai_fall: {
@@ -3993,6 +4098,8 @@ const story = {
 
 const storySections = {
   "序章：献礼与开笼": ["throneGift", "catIntro", "softOrder", "openCage"],
+  "穿越序章：女神与外挂": ["memoryCg01", "memoryCg02", "memoryCg03"],
+  "异世界教程：回档与修炼": ["memoryCg03", "memoryCg09", "memoryCg15"],
   "三十日战役：长篇日历": ["memoryCg01", "memoryCg12", "memoryCg24", "memoryCg30"],
   "三十日档案：昼夜双线": ["memoryCg02", "memoryCg12", "memoryCg24", "memoryCg48"],
   "王冠倒计时：三十夜压力": ["memoryCg06", "memoryCg24", "memoryCg36", "memoryCg54"],
@@ -4015,6 +4122,12 @@ const branchMap = [
     chapter: "穿越序章",
     title: "女神选权能",
     prompt: "现代人穿越前先选外挂：回档王权、全知魔眼，或修炼圣体。",
+  },
+  {
+    id: "isekai_training_01_loop_choice",
+    chapter: "异世界教程",
+    title: "回档修炼",
+    prompt: "每段教程都要读回档、练魔力，或压贵族打出威望。",
   },
   {
     id: "choice_throne",
