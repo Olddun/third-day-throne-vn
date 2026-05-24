@@ -12,6 +12,18 @@ const experienceDeck = [
     timing: "穿越瞬间",
   },
   {
+    id: "death_loop_pressure",
+    name: "死亡回档压力",
+    role: "借鉴轮回系体验，让失败保留情报、疼痛和攻略价值。",
+    timing: "异世界教程",
+  },
+  {
+    id: "training_growth_arc",
+    name: "修炼成长曲线",
+    role: "借鉴成长系体验，把魔法、剑术、礼法和人际都做成可升级技能。",
+    timing: "异世界教程至中盘",
+  },
+  {
     id: "overpowered_crown_fantasy",
     name: "龙傲天王座爽点",
     role: "现代常识和外挂能力压制旧贵族，让审判、战场和恋爱都服务玩家成长。",
@@ -337,6 +349,7 @@ const saveTheCatBeats = [
 
 const branchPoints = [
   { id: "bp00_blessing", act: "穿越序章", question: "女神给的外挂，要回档、魔眼，还是修炼圣体？", options: ["回档王权", "全知魔眼", "修炼圣体"] },
+  { id: "bp00_training", act: "异世界教程", question: "第一轮成长先读回档、练魔力，还是压贵族？", options: ["读回档", "练魔力", "压贵族"] },
   { id: "bp01_execution", act: "序章", question: "稳军心，还是保活口？", options: ["斩袭营者", "扣军令"] },
   { id: "bp02_proof", act: "第一章", question: "逼她暴露，还是暂时保护秘密？", options: ["逼她现形", "装作不知", "设铃试探"] },
   { id: "bp03_food", act: "第一章", question: "救战俘营，救王都粮仓，还是先抓内鬼？", options: ["开仓", "控粮", "钓饵"] },
