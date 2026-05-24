@@ -2183,7 +2183,17 @@ const story = {
     cg: "archiveLedger",
     cgMotion: "libraryConfrontation",
     speaker: "系统",
-    text: "坏结局：烧毁的账册。灰烬留下编号，下一轮能先抓住账房。",
+    text: "坏结局：烧毁的账册。维克托把最后一页红账按进火里，名字在火光里卷曲。",
+    next: "bad_ledger_intel",
+  },
+  bad_ledger_intel: {
+    speaker: "旁白",
+    text: "水盆里的灰烬没有散开。它们拼出一串仓号：北门七，旧粮道，第三锁。",
+    next: "bad_ledger_password",
+  },
+  bad_ledger_password: {
+    speaker: "系统",
+    text: "坏结局确认：下一轮暗号获得。先查北门七号仓，账房会提前露出第四枚蜡封。",
     next: null,
   },
   ending_silent_cage: {
@@ -2193,7 +2203,17 @@ const story = {
     cg: "openCage",
     cgMotion: "openCage",
     speaker: "系统",
-    text: "坏结局：沉默金笼。她还活着，笼底留下半句敌方咒语。",
+    text: "坏结局：沉默金笼。安塔莉亚活了下来，却再也没有把真话交给你。",
+    next: "bad_cage_intel",
+  },
+  bad_cage_intel: {
+    speaker: "旁白",
+    text: "她离开后，笼底露出爪痕。三短一长，正好对应王寝暗门的敲法。",
+    next: "bad_cage_password",
+  },
+  bad_cage_password: {
+    speaker: "系统",
+    text: "坏结局确认：下一轮暗号获得。三短一长用在王寝暗门前，可以提前进入银铃线。",
     next: null,
   },
   ending_northern_blade: {
@@ -2213,7 +2233,17 @@ const story = {
     cg: "infirmaryAftermath",
     cgMotion: "moonCorridor",
     speaker: "系统",
-    text: "坏结局：空床。枕下银戒解锁记忆切割的副作用。",
+    text: "坏结局：空床。塞德里克拿到了证据，床尾却只剩一根浅色长毛。",
+    next: "bad_empty_bed_intel",
+  },
+  bad_empty_bed_intel: {
+    speaker: "旁白",
+    text: "枕下银戒裂开，里面滚出一粒黑蜡。黑蜡只会在记忆切割后凝固。",
+    next: "bad_empty_bed_password",
+  },
+  bad_empty_bed_password: {
+    speaker: "系统",
+    text: "坏结局确认：下一轮暗号获得。黑蜡先于银铃，月下现形前追它，可以保住她的人形。",
     next: null,
   },
   ending_white_trial: {
@@ -2293,7 +2323,17 @@ const story = {
     cg: "finalRitual",
     cgMotion: "libraryConfrontation",
     speaker: "系统",
-    text: "坏结局：黑日。幕后者夺走仪式，太阳背面出现新声音。",
+    text: "坏结局：黑日。仪式被幕后者夺走，白昼像被墨水从背面浸透。",
+    next: "bad_black_sun_intel",
+  },
+  bad_black_sun_intel: {
+    speaker: "旁白",
+    text: "黑日升起前，王印短暂倒转。你看见先王身后还有一只戴白手套的手。",
+    next: "bad_black_sun_password",
+  },
+  bad_black_sun_password: {
+    speaker: "系统",
+    text: "坏结局确认：下一轮暗号获得。白手套在先王之后，终章前先查礼官名单。",
     next: null,
   },
 };
