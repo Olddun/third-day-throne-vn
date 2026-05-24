@@ -41,7 +41,7 @@ globalThis.Image = class Image {};
 
 const { assets, initialStats, speakerActors, story, storySections } = await import("../web/game.js");
 
-const requiredNodes = ["start", "choice_throne", "choice_morning", "choice_library", "ending"];
+const requiredNodes = ["start", "choice_blessing", "choice_throne", "choice_morning", "choice_library", "ending"];
 const missingNodes = requiredNodes.filter((id) => !story[id]);
 if (missingNodes.length) {
   throw new Error(`Missing required story nodes: ${missingNodes.join(", ")}`);
@@ -68,8 +68,8 @@ while (story[cursor] && !story[cursor].choices) {
   firstChoiceDepth += 1;
   cursor = story[cursor].next;
 }
-if (firstChoiceDepth < 14) {
-  throw new Error(`First branch arrives too early: ${firstChoiceDepth} story nodes`);
+if (firstChoiceDepth < 4) {
+  throw new Error(`Goddess blessing branch arrives too early: ${firstChoiceDepth} story nodes`);
 }
 
 const textChars = Object.values(story).reduce((sum, node) => {
@@ -150,7 +150,7 @@ const gameJs = await readFile(new URL("../web/game.js", import.meta.url), "utf8"
 if (!gameJs.includes('(node.speaker ?? "旁白") === "旁白"') || !gameJs.includes('dom.speaker.classList.add("hidden")')) {
   throw new Error("Narration no longer has a protected no-nameplate branch");
 }
-for (const token of ["splitTextPages", "塞德里克的选择", "branchMapHtml", "branchMap", "choiceLog", "quickStoreKey"]) {
+for (const token of ["splitTextPages", "你的选择", "branchMapHtml", "branchMap", "choiceLog", "quickStoreKey"]) {
   if (!gameJs.includes(token)) throw new Error(`VN control/text paging logic is missing: ${token}`);
 }
 

@@ -60,11 +60,28 @@ function collectUntilChoice(start) {
 
 const opening = collectUntilChoice("start");
 const openingText = opening.texts.join("\n");
-for (const hook of ["三十七名猫族俘虏", "刑台", "王印", "玩家替塞德里克"]) {
+for (const hook of ["现代人", "女神", "异世界", "权能"]) {
   if (!openingText.includes(hook)) throw new Error(`Opening lacks immediate hook: ${hook}`);
 }
-if (opening.choiceId !== "choice_throne") {
-  throw new Error(`First player decision should be choice_throne, got ${opening.choiceId}`);
+if (opening.choiceId !== "choice_blessing") {
+  throw new Error(`First player decision should be choice_blessing, got ${opening.choiceId}`);
+}
+
+const blessingChoices = story.choice_blessing.choices.map((choice) => choice.label);
+if (blessingChoices.join("/") !== "回档王权/全知魔眼/修炼圣体") {
+  throw new Error(`Blessing choice lost isekai framing: ${blessingChoices.join("/")}`);
+}
+for (const choice of story.choice_blessing.choices) {
+  if (!choice.flags?.blessing) throw new Error(`Blessing choice lacks persistent flag: ${choice.label}`);
+}
+
+const throneOpening = collectUntilChoice("isekai_fall");
+const throneOpeningText = throneOpening.texts.join("\n");
+for (const hook of ["三十七名猫族俘虏", "刑台", "王印", "你替这位新王"]) {
+  if (!throneOpeningText.includes(hook)) throw new Error(`Throne opening lacks pressure hook: ${hook}`);
+}
+if (throneOpening.choiceId !== "choice_throne") {
+  throw new Error(`Second player decision should be choice_throne, got ${throneOpening.choiceId}`);
 }
 
 const throneChoices = story.choice_throne.choices.map((choice) => choice.label);
@@ -106,12 +123,12 @@ if (!story.teaser_cost.text.includes("拒绝")) {
 }
 
 const indexHtml = await readFile(new URL("../web/index.html", import.meta.url), "utf8");
-if (!indexHtml.includes("你是新王塞德里克")) {
-  throw new Error("Title screen no longer states the player identity");
+if (!indexHtml.includes("你是现代人") || !indexHtml.includes("女神给你一次选择外挂")) {
+  throw new Error("Title screen no longer states the modern isekai identity");
 }
 
 if (longformPlan.productionTargets.plannedEndings < 15 || longformPlan.productionTargets.plannedCg < 80) {
   throw new Error("Longform plan is not exposed through the runtime debug surface");
 }
 
-console.log("Opening hooks OK: first minute pressure, identity, dilemma costs, and longform plan are present.");
+console.log("Opening hooks OK: modern isekai identity, goddess blessing, throne pressure, and costs are present.");

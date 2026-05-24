@@ -58,6 +58,17 @@ const branchNodes = reachableNodes.filter(([, node]) => node.choices?.length).le
 const endings = reachableNodes.filter(([, node]) => node.next === null && /结局|大结局/.test(node.text ?? ""));
 const reachableCg = new Set(reachableNodes.flatMap(([, node]) => (node.cg ? [node.cg] : [])));
 const minutes = Math.round((textChars / 350) * 10) / 10;
+const requiredIsekaiNodes = [
+  "modern_last_train",
+  "goddess_gate",
+  "choice_blessing",
+  "blessing_loop",
+  "blessing_eye",
+  "blessing_body",
+  "isekai_fall",
+  "choice_throne",
+];
+const missingIsekaiNodes = requiredIsekaiNodes.filter((id) => !visited.has(id));
 const requiredMidpointNodes = [
   "midpoint_false_victory",
   "midpoint_choice_memory",
@@ -210,6 +221,7 @@ const report = {
   reachableCg: reachableCg.size,
   actualCgAssets: Object.keys(assets.cg).length,
   plannedCg: longformPlan.cgPlan.length,
+  isekaiNodes: requiredIsekaiNodes.length - missingIsekaiNodes.length,
   midpointReversalNodes: requiredMidpointNodes.length - missingMidpointNodes.length,
   closedCourtNodes: requiredWolfNodes.length - missingWolfNodes.length,
   lieMapNodes: requiredLieMapNodes.length - missingLieMapNodes.length,
@@ -231,6 +243,7 @@ if (endings.length < 15) throw new Error(`Need 15+ reachable endings, found ${en
 if (longformPlan.cgPlan.length < 80) throw new Error(`Need 80+ planned CGs, found ${longformPlan.cgPlan.length}`);
 if (Object.keys(assets.cg).length < 80) throw new Error(`Need 80+ actual CG assets, found ${Object.keys(assets.cg).length}`);
 if (reachableCg.size < 80) throw new Error(`Need 80+ reachable CGs, found ${reachableCg.size}`);
+if (missingIsekaiNodes.length) throw new Error(`Isekai opening nodes are not reachable: ${missingIsekaiNodes.join(", ")}`);
 if (missingMidpointNodes.length) throw new Error(`Midpoint reversal nodes are not reachable: ${missingMidpointNodes.join(", ")}`);
 if (missingWolfNodes.length) throw new Error(`Closed court suspicion nodes are not reachable: ${missingWolfNodes.join(", ")}`);
 if (missingLieMapNodes.length) throw new Error(`Lie map nodes are not reachable: ${missingLieMapNodes.join(", ")}`);
