@@ -146,6 +146,17 @@ const requiredRouteLockNodes = [
   "route_lock_close",
 ];
 const missingRouteLockNodes = requiredRouteLockNodes.filter((id) => !visited.has(id));
+const requiredConsequenceNodes = [
+  "consequence_corridor_open",
+  "consequence_01_context",
+  "consequence_01_choice",
+  "consequence_16_payoff",
+  "consequence_32_payoff",
+  "consequence_48_payoff",
+  "consequence_64_choice",
+  "consequence_corridor_close",
+];
+const missingConsequenceNodes = requiredConsequenceNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -167,6 +178,7 @@ const report = {
   collapseNodes: requiredCollapseNodes.length - missingCollapseNodes.length,
   trialGauntletNodes: requiredTrialGauntletNodes.length - missingTrialGauntletNodes.length,
   routeLockNodes: requiredRouteLockNodes.length - missingRouteLockNodes.length,
+  consequenceNodes: requiredConsequenceNodes.length - missingConsequenceNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -183,6 +195,7 @@ if (missingTrialEveNodes.length) throw new Error(`Trial eve nodes are not reacha
 if (missingCollapseNodes.length) throw new Error(`Collapse nodes are not reachable: ${missingCollapseNodes.join(", ")}`);
 if (missingTrialGauntletNodes.length) throw new Error(`Trial gauntlet nodes are not reachable: ${missingTrialGauntletNodes.join(", ")}`);
 if (missingRouteLockNodes.length) throw new Error(`Route lock nodes are not reachable: ${missingRouteLockNodes.join(", ")}`);
+if (missingConsequenceNodes.length) throw new Error(`Consequence corridor nodes are not reachable: ${missingConsequenceNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));

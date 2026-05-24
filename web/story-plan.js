@@ -108,6 +108,12 @@ const experienceDeck = [
     timing: "终局前夜",
   },
   {
+    id: "consequence_corridor",
+    name: "终局后果回廊",
+    role: "把旧选择带上下文回放，让结局入口前每段后果都被确认。",
+    timing: "结局群前",
+  },
+  {
     id: "branch_locked_revelation",
     name: "路线锁真相",
     role: "不同结局开放不同幕后证据，驱动玩家追全结局。",
@@ -296,12 +302,13 @@ const branchPoints = [
   { id: "bp14_enter_trial", act: "第九章", question: "证据、人形和时间同时崩坏时，怎样入庭？", options: ["入庭", "补页", "扶她"] },
   { id: "bp15_trial_round", act: "第九章", question: "每轮证据攻防用哪种打法？", options: ["追名字", "压证物", "护证人"] },
   { id: "bp16_route_lock", act: "终局前夜", question: "每个人的伤口、面具和去路怎么处理？", options: ["接伤口", "拆面具", "给去路"] },
-  { id: "bp17_trial", act: "第九章", question: "公开真相，还是先保护证人？", options: ["公审", "密审", "逃离"] },
-  { id: "bp18_coup", act: "第九章", question: "政变夜救王座、救她、救民众？", options: ["守殿", "追她", "开门"] },
-  { id: "bp19_sacrifice", act: "第九章", question: "谁承受记忆回流？", options: ["塞德里克", "安塔莉亚", "书记官"] },
-  { id: "bp20_exile", act: "第九章", question: "失去王位后回宫，还是去旧都？", options: ["回宫", "旧都", "北境"] },
-  { id: "bp21_final_ritual", act: "终章", question: "破咒方式决定人、国、记忆的取舍。", options: ["王血", "猫印", "双魂"] },
-  { id: "bp22_gate", act: "终章", question: "终局之后留下、远走、或重启周目？", options: ["留下", "远走", "重启"] },
+  { id: "bp17_consequence", act: "结局群前", question: "旧选择的后果如何进入分支树？", options: ["收证据", "稳人心", "开暗线"] },
+  { id: "bp18_trial", act: "第九章", question: "公开真相，还是先保护证人？", options: ["公审", "密审", "逃离"] },
+  { id: "bp19_coup", act: "第九章", question: "政变夜救王座、救她、救民众？", options: ["守殿", "追她", "开门"] },
+  { id: "bp20_sacrifice", act: "第九章", question: "谁承受记忆回流？", options: ["塞德里克", "安塔莉亚", "书记官"] },
+  { id: "bp21_exile", act: "第九章", question: "失去王位后回宫，还是去旧都？", options: ["回宫", "旧都", "北境"] },
+  { id: "bp22_final_ritual", act: "终章", question: "破咒方式决定人、国、记忆的取舍。", options: ["王血", "猫印", "双魂"] },
+  { id: "bp23_gate", act: "终章", question: "终局之后留下、远走、或重启周目？", options: ["留下", "远走", "重启"] },
 ];
 
 const endings = [
