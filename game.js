@@ -1,5 +1,74 @@
 import { longformPlan } from "./story-plan.js";
 
+const memoryCgTitles = [
+  "刑台初雪",
+  "笼中王印",
+  "猫爪藏证",
+  "寝宫暗铃",
+  "枕下小印",
+  "早膳试探",
+  "喷泉救援",
+  "议事地图",
+  "夜读寓言",
+  "月廊真身",
+  "禁书残页",
+  "书库对峙",
+  "同盟契约",
+  "北门营地",
+  "隐藏粮仓",
+  "封存红账",
+  "账页焚灰",
+  "闭锁长桌",
+  "将军雪印",
+  "大臣袖蜡",
+  "书记旧伤",
+  "米拉开门",
+  "卢卡缺钥",
+  "旧都月门",
+  "旧都落雪",
+  "地下祭坛",
+  "幼王火场",
+  "幼女断铃",
+  "假胜利印",
+  "公开审判",
+  "密审灯影",
+  "毒茶证词",
+  "王宫政变",
+  "北境军阵",
+  "燃烧书库",
+  "伤后礼拜",
+  "人形崩解",
+  "放逐夜路",
+  "北境望楼",
+  "记忆回流",
+  "书记献忆",
+  "猫印觉醒",
+  "王血术式",
+  "双魂仪式",
+  "黑日坠殿",
+  "沉默金笼",
+  "铁冠孤影",
+  "猫王复国",
+  "双王晨议",
+  "白猫之约",
+  "零周目信",
+  "空床银戒",
+  "宫门米拉",
+  "旧都新家",
+  "再见国王",
+  "无月庭院",
+  "北境刀声",
+  "侍从钥匙",
+  "白色审判",
+];
+
+const memoryCgAssets = Object.fromEntries(
+  memoryCgTitles.map((_, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    return [`memoryCg${number}`, `./assets/cg/memory_cg_${number}.svg`];
+  }),
+);
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -72,6 +141,7 @@ const assets = {
     infirmaryAftermath: "./assets/cg/infirmary_aftermath.png",
     finalRitual: "./assets/cg/final_ritual.png",
     sunriseEnding: "./assets/cg/sunrise_ending.png",
+    ...memoryCgAssets,
   },
   music: {
     goldberg: "./assets/music/goldberg_aria.ogg",
@@ -85,6 +155,24 @@ const initialStats = {
   vigilance: 0,
   observation: 0,
 };
+
+const memoryTreeStory = Object.fromEntries(
+  memoryCgTitles.map((title, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    const nextNumber = String(index + 2).padStart(2, "0");
+    return [
+      `memory_tree_${number}`,
+      {
+        bg: index % 4 === 0 ? "throne" : index % 4 === 1 ? "library" : index % 4 === 2 ? "entrance" : "bed",
+        cg: `memoryCg${number}`,
+        cgMotion: index % 3 === 0 ? "libraryConfrontation" : index % 3 === 1 ? "moonCorridor" : "softOrder",
+        speaker: "旁白",
+        text: `记忆树第${index + 1}枚叶片亮起：${title}。这并非回忆，是明日审判的伏笔。`,
+        next: index + 1 < memoryCgTitles.length ? `memory_tree_${nextNumber}` : "memory_tree_close",
+      },
+    ];
+  }),
+);
 
 const story = {
   start: {
@@ -2083,6 +2171,24 @@ const story = {
   trial_eve_cedric_ready: {
     speaker: "塞德里克",
     text: "很好。门开得越早，躲在门后的人越容易看见我们带了什么。",
+    next: "memory_tree_open",
+  },
+  memory_tree_open: {
+    chapter: "第八章",
+    bg: "library",
+    cg: "memoryCg01",
+    cgMotion: "libraryConfrontation",
+    speaker: "旁白",
+    text: "王印触到谎言地图，墙上长出一棵银色记忆树。每片叶子都扣着一张未来 CG。",
+    next: "memory_tree_01",
+  },
+  ...memoryTreeStory,
+  memory_tree_close: {
+    bg: "council",
+    cg: "memoryCg59",
+    cgMotion: "softOrder",
+    speaker: "安塔莉亚",
+    text: "我看见了。每一次失败都在把我们推向同一个清晨。",
     next: "ch5_public_truth",
   },
   ch5_public_truth: {
