@@ -4216,12 +4216,56 @@ function saveReadNodes() {
   localStorage.setItem(readKey, JSON.stringify([...readNodes]));
 }
 
-function preload() {
+function preloadImage(src) {
+  const image = new Image();
+  image.decoding = "async";
+  image.src = src;
+}
+
+function uniqueSources(sources) {
+  return [...new Set(sources.filter(Boolean))];
+}
+
+function preloadCritical() {
+  uniqueSources([
+    assets.backgrounds.throne,
+    assets.cg.throneGift,
+    assets.cg.catIntro,
+    assets.characters.cedric.neutral,
+    assets.characters.general.proud,
+    assets.characters.minister.smile,
+    assets.characters.scribe.gentle,
+    assets.characters.cat.guarded,
+  ]).forEach(preloadImage);
+}
+
+function idle(callback) {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(callback, { timeout: 1800 });
+  } else {
+    window.setTimeout(callback, 900);
+  }
+}
+
+function preloadDeferred() {
+  if (typeof HTMLImageElement === "undefined") return;
   const characterSources = Object.values(assets.characters).flatMap((expressions) => Object.values(expressions));
-  [...Object.values(assets.backgrounds), ...characterSources, ...Object.values(assets.cg)].forEach((src) => {
-    const image = new Image();
-    image.src = src;
-  });
+  const sources = uniqueSources([...Object.values(assets.backgrounds), ...characterSources, ...Object.values(assets.cg)]);
+  let index = 0;
+  const batch = () => {
+    const end = Math.min(index + 4, sources.length);
+    while (index < end) {
+      preloadImage(sources[index]);
+      index += 1;
+    }
+    if (index < sources.length) idle(batch);
+  };
+  idle(batch);
+}
+
+function preload() {
+  preloadCritical();
+  preloadDeferred();
 }
 
 function initAudio() {
