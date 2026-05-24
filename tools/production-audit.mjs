@@ -177,6 +177,26 @@ const requiredDossierNodes = [
   "campaign_dossier_close",
 ];
 const missingDossierNodes = requiredDossierNodes.filter((id) => !visited.has(id));
+const requiredCountdownNodes = [
+  "crown_countdown_open",
+  "countdown_01_edict_goal",
+  "countdown_01_edict_choice",
+  "countdown_10_memory_reward",
+  "countdown_20_blackfire_reward",
+  "countdown_30_sunrise_choice",
+  "crown_countdown_close",
+];
+const missingCountdownNodes = requiredCountdownNodes.filter((id) => !visited.has(id));
+const requiredArcLedgerNodes = [
+  "character_arc_ledger_open",
+  "arc_01_cedric_want_goal",
+  "arc_01_cedric_want_choice",
+  "arc_10_whitehand_betray_reward",
+  "arc_20_catmark_choice_reward",
+  "arc_30_people_payoff_choice",
+  "character_arc_ledger_close",
+];
+const missingArcLedgerNodes = requiredArcLedgerNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -201,6 +221,8 @@ const report = {
   consequenceNodes: requiredConsequenceNodes.length - missingConsequenceNodes.length,
   campaignNodes: requiredCampaignNodes.length - missingCampaignNodes.length,
   dossierNodes: requiredDossierNodes.length - missingDossierNodes.length,
+  countdownNodes: requiredCountdownNodes.length - missingCountdownNodes.length,
+  arcLedgerNodes: requiredArcLedgerNodes.length - missingArcLedgerNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -220,6 +242,8 @@ if (missingRouteLockNodes.length) throw new Error(`Route lock nodes are not reac
 if (missingConsequenceNodes.length) throw new Error(`Consequence corridor nodes are not reachable: ${missingConsequenceNodes.join(", ")}`);
 if (missingCampaignNodes.length) throw new Error(`Campaign calendar nodes are not reachable: ${missingCampaignNodes.join(", ")}`);
 if (missingDossierNodes.length) throw new Error(`Campaign dossier nodes are not reachable: ${missingDossierNodes.join(", ")}`);
+if (missingCountdownNodes.length) throw new Error(`Crown countdown nodes are not reachable: ${missingCountdownNodes.join(", ")}`);
+if (missingArcLedgerNodes.length) throw new Error(`Character arc ledger nodes are not reachable: ${missingArcLedgerNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));

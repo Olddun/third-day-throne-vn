@@ -297,6 +297,61 @@ const dossierLines = [
   ["dawn", "晨光档案", "留下下一日钩子", "钟声提前少一响", "晨光后果写入地图"],
 ];
 
+const crownCountdownTracks = [
+  ["edict", "伪令倒数", "拆今日伪令", "礼署提前盖章", "伪令链收进王冠图"],
+  ["scaffold", "刑台倒数", "拖住广场落刀", "刽子手换了口令", "刑台线推迟半刻"],
+  ["seal", "王印倒数", "校准烧黑王印", "印面渗出旧血", "王印线补上缺口"],
+  ["witness", "活证倒数", "保住第二证人", "药车抢先出城", "证人线多一名活口"],
+  ["pantry", "粮仓倒数", "查清断粮名单", "面粉袋藏着军票", "民心线稳住一格"],
+  ["mirror", "镜厅倒数", "识破替身礼服", "镜中少了一道人影", "替身线露出衣角"],
+  ["bell", "银铃倒数", "修好墙中银铃", "铃舌刻着旧姓", "银铃线回到她手里"],
+  ["ledger", "红账倒数", "补齐红账页码", "账页自己退后一页", "财政线获得页码"],
+  ["north", "北境倒数", "查北境军路", "雪路只剩半枚马蹄", "军线留下坐标"],
+  ["memory", "缺忆倒数", "接回少年记忆", "火场门锁重新落下", "记忆线取回钥匙"],
+  ["dream", "梦审倒数", "守住梦中审台", "梦里王冠压低", "梦审线添一把椅"],
+  ["knife", "军刀倒数", "验北军刀痕", "刀背刻着假誓", "兵变线找到刀主"],
+  ["maid", "侧门倒数", "护米拉走侧门", "门外脚步提前停住", "侧门线开出缝隙"],
+  ["key", "灰钥倒数", "追卢卡灰钥", "钥匙齿缝落灰", "钥匙线指向寝宫"],
+  ["glove", "白手倒数", "核白手名单", "名单边角被火舔过", "礼官线留下掌纹"],
+  ["wax", "黑蜡倒数", "测试黑蜡残渣", "蜡面浮出第二张脸", "黑蜡线记下温度"],
+  ["trial", "庭审倒数", "预排审判座次", "证人席少了名字", "庭审线多一盏灯"],
+  ["exile", "退路倒数", "确认旧都退路", "路标被雪埋到反面", "流放线保留车辙"],
+  ["crown", "铁冠倒数", "衡量王冠重量", "冠内霜纹爬上手背", "铁冠线记住代价"],
+  ["blackfire", "黑火倒数", "盯住天窗墨火", "黑火提前落在地图", "黑日线露出方位"],
+  ["catmark", "猫印倒数", "确认猫印脉动", "猫印和王印互相排斥", "猫王女线亮起"],
+  ["zeroday", "零日倒数", "追问空白零日", "月相表漏出新洞", "周目线留下日期"],
+  ["senate", "密议倒数", "偷听摄政密议", "酒杯换了主人", "密议线记下席位"],
+  ["snowgate", "雪门倒数", "安排宫门顺序", "门外雪风倒吹", "宫门线保住先手"],
+  ["breadline", "面包倒数", "护小人物证物", "面包屑被人扫走", "民间线留住脚印"],
+  ["letter", "来信倒数", "拆未来来信", "信封日期跳到明夜", "未来线写下回信"],
+  ["mask", "假面倒数", "逼笑脸说真话", "面具后传来叹息", "弧光线撬开一角"],
+  ["heartbeat", "心跳倒数", "稳住她的体温", "黑蜡爬过腕骨", "亲密线回暖一寸"],
+  ["oath", "誓词倒数", "重写同盟誓词", "誓词末尾缺一名", "同盟线补上名字"],
+  ["sunrise", "晨光倒数", "留下明日目标", "钟声少响一声", "终局线点亮晨边"],
+];
+
+const arcActors = [
+  ["cedric", "塞德里克", "保住王位也保活口"],
+  ["antalia", "安塔莉亚", "夺回名字并保族人"],
+  ["rowan", "罗温", "守住北境军誓"],
+  ["victor", "维克托", "让财政吞掉旧罪"],
+  ["scribe", "书记官", "保存被删记忆"],
+  ["mira", "米拉", "护住侧门活路"],
+  ["luca", "卢卡", "把灰钥交给对的人"],
+  ["whitehand", "白手套", "把黑日推上王座"],
+  ["catmark", "猫印", "让双魂不再互咬"],
+  ["people", "城民", "活到审判之后"],
+];
+
+const arcBeats = [
+  ["want", "欲望", "说出真正想要", "旁人逼他闭嘴", "欲望线写入弧光"],
+  ["mask", "伪装", "拆掉表面身份", "旧称呼又盖回来", "伪装线露出裂纹"],
+  ["wound", "伤口", "承认最深伤口", "证词刺向旧痛", "伤口线得到回应"],
+  ["betray", "背叛", "核清背叛价格", "盟友先递来刀柄", "背叛线留下代价"],
+  ["choice", "转向", "逼出今日转向", "退路忽然被封死", "转向线打开新门"],
+  ["payoff", "回报", "兑现人物回报", "黑蜡索要姓名", "弧光线进入终局"],
+];
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -784,6 +839,172 @@ const campaignDossierStory = Object.fromEntries(
         ],
       ];
     }),
+  ),
+);
+
+const crownCountdownStory = Object.fromEntries(
+  campaignDayTitles.flatMap((dayTitle, dayIndex) =>
+    crownCountdownTracks.flatMap(([trackId, trackName, objective, pressure, reward], trackIndex) => {
+      const day = String(dayIndex + 1).padStart(2, "0");
+      const nextTrack = crownCountdownTracks[trackIndex + 1]?.[0];
+      const nextDay = String(dayIndex + 2).padStart(2, "0");
+      const base = `countdown_${day}_${trackId}`;
+      const next =
+        nextTrack
+          ? `countdown_${day}_${nextTrack}_goal`
+          : dayIndex + 1 < campaignDayTitles.length
+            ? `countdown_${nextDay}_edict_goal`
+            : "crown_countdown_close";
+      return [
+        [
+          `${base}_goal`,
+          {
+            bg: trackIndex % 5 === 0 ? "throne" : trackIndex % 5 === 1 ? "council" : trackIndex % 5 === 2 ? "library" : trackIndex % 5 === 3 ? "entrance" : "bed",
+            cg: `memoryCg${String(1 + ((dayIndex * crownCountdownTracks.length + trackIndex) % 59)).padStart(2, "0")}`,
+            cgMotion: trackIndex % 3 === 0 ? "libraryConfrontation" : trackIndex % 3 === 1 ? "moonCorridor" : "softOrder",
+            speaker: "旁白",
+            text: `第${dayIndex + 1}日·${trackName}：${objective}。`,
+            next: `${base}_pressure`,
+          },
+        ],
+        [
+          `${base}_pressure`,
+          {
+            speaker: "旁白",
+            text: `${dayTitle}倒计阻力：${pressure}。`,
+            next: `${base}_choice`,
+          },
+        ],
+        [
+          `${base}_choice`,
+          {
+            choices: [
+              { label: "压钟", hint: "拖住时刻", effects: { vigilance: 1 }, next: `${base}_clock` },
+              { label: "换证", hint: "改用实物", effects: { observation: 1 }, next: `${base}_proof` },
+              { label: "护名", hint: "保住活人", effects: { closeness: 1 }, next: `${base}_name` },
+            ],
+          },
+        ],
+        [
+          `${base}_clock`,
+          {
+            speaker: "塞德里克",
+            text: `${trackName}先压住钟声，王座少丢半刻。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_proof`,
+          {
+            speaker: "安塔莉亚",
+            text: `${trackName}先换成实证，假话无处落脚。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_name`,
+          {
+            speaker: "旁白",
+            text: `${trackName}先护住名字，活人终于能入席。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_reward`,
+          {
+            speaker: "旁白",
+            text: `回报：${reward}。下一晚追加新火线。`,
+            next,
+          },
+        ],
+      ];
+    }),
+  ),
+);
+
+const characterArcLedgerStory = Object.fromEntries(
+  campaignDayTitles.flatMap((dayTitle, dayIndex) =>
+    arcActors.flatMap(([actorId, actorName, desire], actorIndex) =>
+      arcBeats.flatMap(([beatId, beatName, objective, pressure, reward], beatIndex) => {
+        const day = String(dayIndex + 1).padStart(2, "0");
+        const nextBeat = arcBeats[beatIndex + 1]?.[0];
+        const nextActor = arcActors[actorIndex + 1]?.[0];
+        const nextDay = String(dayIndex + 2).padStart(2, "0");
+        const base = `arc_${day}_${actorId}_${beatId}`;
+        const next =
+          nextBeat
+            ? `arc_${day}_${actorId}_${nextBeat}_goal`
+            : nextActor
+              ? `arc_${day}_${nextActor}_want_goal`
+              : dayIndex + 1 < campaignDayTitles.length
+                ? `arc_${nextDay}_cedric_want_goal`
+                : "character_arc_ledger_close";
+        const cgNumber = String(1 + ((dayIndex * arcActors.length * arcBeats.length + actorIndex * arcBeats.length + beatIndex) % 59)).padStart(2, "0");
+        return [
+          [
+            `${base}_goal`,
+            {
+              bg: actorIndex % 5 === 0 ? "throne" : actorIndex % 5 === 1 ? "library" : actorIndex % 5 === 2 ? "council" : actorIndex % 5 === 3 ? "entrance" : "bed",
+              cg: `memoryCg${cgNumber}`,
+              cgMotion: beatIndex % 3 === 0 ? "softOrder" : beatIndex % 3 === 1 ? "libraryConfrontation" : "moonCorridor",
+              speaker: "旁白",
+              text: `第${dayIndex + 1}日·${actorName}${beatName}：${objective}。`,
+              next: `${base}_pressure`,
+            },
+          ],
+          [
+            `${base}_pressure`,
+            {
+              speaker: "旁白",
+              text: `${dayTitle}弧光阻力：${pressure}。`,
+              next: `${base}_choice`,
+            },
+          ],
+          [
+            `${base}_choice`,
+            {
+              choices: [
+                { label: "认伤", hint: "承认代价", effects: { closeness: 1 }, next: `${base}_wound` },
+                { label: "拆谎", hint: "逼出真话", effects: { observation: 1 }, next: `${base}_truth` },
+                { label: "给路", hint: "放出下一步", effects: { vigilance: 1 }, next: `${base}_path` },
+              ],
+            },
+          ],
+          [
+            `${base}_wound`,
+            {
+              speaker: "旁白",
+              text: `${actorName}先认下伤口，${desire}有了代价。`,
+              next: `${base}_reward`,
+            },
+          ],
+          [
+            `${base}_truth`,
+            {
+              speaker: "旁白",
+              text: `${actorName}先拆开谎言，${beatName}露出底色。`,
+              next: `${base}_reward`,
+            },
+          ],
+          [
+            `${base}_path`,
+            {
+              speaker: "旁白",
+              text: `${actorName}先得到去路，下一幕有人回头。`,
+              next: `${base}_reward`,
+            },
+          ],
+          [
+            `${base}_reward`,
+            {
+              speaker: "旁白",
+              text: `回报：${reward}。${actorName}的下一步被点亮。`,
+              next,
+            },
+          ],
+        ];
+      }),
+    ),
   ),
 );
 
@@ -1565,6 +1786,42 @@ const story = {
     cgMotion: "softOrder",
     speaker: "旁白",
     text: "昼夜双线档案合拢。三十日里没有空白的一天。",
+    next: "crown_countdown_open",
+  },
+  crown_countdown_open: {
+    chapter: "王冠倒计时",
+    bg: "throne",
+    cg: "memoryCg36",
+    cgMotion: "libraryConfrontation",
+    speaker: "旁白",
+    text: "王冠内侧响起三十声倒计时。每一声都逼他保住一条线。",
+    next: "countdown_01_edict_goal",
+  },
+  ...crownCountdownStory,
+  crown_countdown_close: {
+    bg: "throne",
+    cg: "memoryCg54",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "王冠倒计时停在掌心。下一章的每个人都带着已确认的目的。",
+    next: "character_arc_ledger_open",
+  },
+  character_arc_ledger_open: {
+    chapter: "人物弧光账本",
+    bg: "library",
+    cg: "memoryCg50",
+    cgMotion: "libraryConfrontation",
+    speaker: "旁白",
+    text: "塞德里克翻开人物弧光账本。每个人都写下欲望、伤口和去路。",
+    next: "arc_01_cedric_want_goal",
+  },
+  ...characterArcLedgerStory,
+  character_arc_ledger_close: {
+    bg: "library",
+    cg: "memoryCg59",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "人物弧光账本合上。接下来每次出场都带着清晰目的。",
     next: "ch2_dawn",
   },
   ch2_dawn: {
@@ -3653,6 +3910,8 @@ const storySections = {
   "序章：献礼与开笼": ["throneGift", "catIntro", "softOrder", "openCage"],
   "三十日战役：长篇日历": ["memoryCg01", "memoryCg12", "memoryCg24", "memoryCg30"],
   "三十日档案：昼夜双线": ["memoryCg02", "memoryCg12", "memoryCg24", "memoryCg48"],
+  "王冠倒计时：三十夜压力": ["memoryCg06", "memoryCg24", "memoryCg36", "memoryCg54"],
+  "人物弧光账本：欲望与去路": ["memoryCg08", "memoryCg28", "memoryCg50", "memoryCg59"],
   "第一章：早膳、救猫与议事厅": ["morningBreakfast", "saveCat", "councilSignal", "eveningFable"],
   "月圆夜：真身、禁书与对峙": ["moonCorridor", "humanReveal", "librarySpellbook", "libraryConfrontation"],
   "第二章：临时同盟与营地": ["truceLibrary", "refugeeCamp", "archiveLedger"],
@@ -3701,6 +3960,18 @@ const branchMap = [
     chapter: "三十日档案",
     title: "昼夜双线",
     prompt: "每条档案都要补上下文：翻旧名、封证物，或牵住她。",
+  },
+  {
+    id: "countdown_01_edict_choice",
+    chapter: "王冠倒计时",
+    title: "三十夜压力",
+    prompt: "每个倒计回合都要压钟、换证，或护住名字。",
+  },
+  {
+    id: "arc_01_cedric_want_choice",
+    chapter: "人物弧光账本",
+    title: "欲望与去路",
+    prompt: "每个人物都要认伤、拆谎，或给出下一步去路。",
   },
   {
     id: "ch2_choice_archive",
