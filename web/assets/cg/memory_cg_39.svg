@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="北境望楼">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#172554"/>
+      <stop offset="0.55" stop-color="#10131f"/>
+      <stop offset="1" stop-color="#05070d"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="38%" r="48%">
+      <stop offset="0" stop-color="#a7f3d0" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#38bdf8" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <circle cx="404" cy="112" r="150" fill="url(#halo)"/>
+  <circle cx="404" cy="112" r="46" fill="#f0f9ff" opacity="0.9"/>
+  <g opacity="0.35" stroke="#a7f3d0" stroke-width="2">
+    <path d="M130 180 H1150"/><path d="M90 270 H1210"/><path d="M170 360 H1110"/>
+    <path d="M240 90 V610"/><path d="M480 70 V650"/><path d="M720 90 V630"/><path d="M960 70 V650"/>
+  </g>
+  <path d="M0 640 C300 570 500 610 710 555 C900 500 1080 605 1280 565 L1280 720 L0 720 Z" fill="#070912"/>
+  <g fill="#0b1020">
+    <rect x="846" y="210" width="82" height="370" rx="8"/>
+    <path d="M826 210 L887 130 L948 210 Z"/>
+    <rect x="874" y="280" width="26" height="120" rx="13" fill="#38bdf8" opacity="0.44"/>
+  </g>
+  <g transform="translate(670 390)" opacity="0.92">
+    <path d="M0 190 C32 70 76 10 132 0 C190 12 226 78 250 190 Z" fill="#080b13"/>
+    <path d="M102 20 L74 -26 L136 5 L190 -24 L166 28" fill="#080b13"/>
+    <circle cx="114" cy="60" r="5" fill="#a7f3d0"/><circle cx="154" cy="60" r="5" fill="#a7f3d0"/>
+  </g>
+  <g transform="translate(160 510)">
+    <rect x="0" y="0" width="520" height="96" rx="10" fill="#05070d" opacity="0.58"/>
+    <text x="28" y="42" fill="#f0f9ff" font-size="28" font-family="'Songti SC','Noto Serif CJK SC',serif" letter-spacing="2">CG 39</text>
+    <text x="28" y="78" fill="#a7f3d0" font-size="34" font-family="'Songti SC','Noto Serif CJK SC',serif" font-weight="700">北境望楼</text>
+  </g>
+  <path d="M80 650 C360 615 560 695 830 640 C1030 598 1130 640 1210 610" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.7" filter="url(#soft)"/>
+</svg>

@@ -131,6 +131,8 @@ const report = {
 if (branchNodes < 10) throw new Error(`Need 10+ actual branch nodes, found ${branchNodes}`);
 if (endings.length < 15) throw new Error(`Need 15+ reachable endings, found ${endings.length}`);
 if (longformPlan.cgPlan.length < 80) throw new Error(`Need 80+ planned CGs, found ${longformPlan.cgPlan.length}`);
+if (Object.keys(assets.cg).length < 80) throw new Error(`Need 80+ actual CG assets, found ${Object.keys(assets.cg).length}`);
+if (reachableCg.size < 80) throw new Error(`Need 80+ reachable CGs, found ${reachableCg.size}`);
 if (missingMidpointNodes.length) throw new Error(`Midpoint reversal nodes are not reachable: ${missingMidpointNodes.join(", ")}`);
 if (missingWolfNodes.length) throw new Error(`Closed court suspicion nodes are not reachable: ${missingWolfNodes.join(", ")}`);
 if (missingLieMapNodes.length) throw new Error(`Lie map nodes are not reachable: ${missingLieMapNodes.join(", ")}`);
