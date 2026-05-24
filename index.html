@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第三十日王座</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23d7b46a' d='M16 4c4 0 7 3 7 7 0 5-7 17-7 17S9 16 9 11c0-4 3-7 7-7Z'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="app" class="app" aria-label="第三十日王座 visual novel">
+      <section id="title-screen" class="title-screen">
+        <div class="title-copy">
+          <p class="kicker">Execution Clock / Court Mystery</p>
+          <h1>第三十日王座</h1>
+          <p class="subtitle">你是新王塞德里克。处决令还没落墨，金丝笼已经被抬到王座前。</p>
+          <div class="title-actions">
+            <button id="start-game" type="button">开始游戏</button>
+            <button id="continue-game" type="button">继续</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="stage" class="stage hidden">
+        <img id="background" class="background" alt="" />
+        <div id="tone-overlay" class="tone-overlay"></div>
+        <div id="cg-stage" class="cg-stage hidden" aria-hidden="true">
+          <img id="event-cg" class="event-cg" alt="" />
+          <div id="cg-effects" class="cg-effects"></div>
+        </div>
+        <div id="cast-layer" class="cast-layer" aria-hidden="true"></div>
+        <img id="character" class="character hidden" alt="" />
+
+        <aside id="hud" class="hud">
+          <span id="chapter-label">序章</span>
+          <span id="stats-label">亲近 0 · 警戒 0 · 观察 0</span>
+        </aside>
+
+        <nav class="topbar" aria-label="game controls">
+          <button id="history-button" type="button">历史</button>
+          <button id="save-button" type="button">存档</button>
+          <button id="load-button" type="button">读档</button>
+          <button id="settings-button" type="button">设置</button>
+        </nav>
+
+        <div id="choice-panel" class="choice-panel hidden"></div>
+
+        <section id="dialogue" class="dialogue" role="button" tabindex="0" aria-label="next dialogue">
+          <div class="nameplate" id="speaker">旁白</div>
+          <p id="line"></p>
+          <div class="dialogue-tools" aria-label="visual novel controls">
+            <button id="log-inline-button" type="button">历史</button>
+            <button id="auto-button" type="button">自动</button>
+            <button id="skip-button" type="button">快进</button>
+            <button id="map-button" type="button">分支</button>
+            <button id="quick-save-button" type="button">快存</button>
+            <button id="quick-load-button" type="button">快读</button>
+            <button id="settings-inline-button" type="button">设置</button>
+          </div>
+          <span id="next-mark">点击继续</span>
+        </section>
+      </section>
+
+      <dialog id="modal">
+        <form method="dialog">
+          <header>
+            <strong id="modal-title">设置</strong>
+            <button value="close" type="submit" aria-label="close">×</button>
+          </header>
+          <div id="modal-body"></div>
+        </form>
+      </dialog>
+    </main>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) registration.unregister();
+        });
+      }
+    </script>
+    <script type="module" src="./game.js"></script>
+  </body>
+</html>
