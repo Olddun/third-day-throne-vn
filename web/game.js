@@ -270,6 +270,33 @@ const campaignPhases = [
   ["hook", "夜钩", "留下目标", "钟声停住", "下一日钩子点亮"],
 ];
 
+const dossierLines = [
+  ["throne", "王座档案", "确认今日王令", "摄政席偷换议程", "王座后果写入地图"],
+  ["camp", "营地档案", "点名活口证人", "药车名单被涂黑", "证人后果写入地图"],
+  ["ledger", "账册档案", "校对红账缺页", "墨迹吞掉姓氏", "财政后果写入地图"],
+  ["bell", "银铃档案", "追踪墙中铃声", "铃声只在她耳边响", "银铃后果写入地图"],
+  ["dream", "梦审档案", "进入少年火场", "王印逼他认全罪", "梦审后果写入地图"],
+  ["letter", "密信档案", "拆读未来笔迹", "来信日期反复跳动", "周目后果写入地图"],
+  ["ruin", "旧都档案", "核对废墟旧名", "雪把门牌埋住", "旧都后果写入地图"],
+  ["mask", "面具档案", "逼一人说真话", "面具主人先退一步", "弧光后果写入地图"],
+  ["bond", "亲密档案", "稳住她的人形", "黑蜡沿手腕爬升", "亲密后果写入地图"],
+  ["knife", "军刀档案", "查北境调兵", "军印又多一道假痕", "军方后果写入地图"],
+  ["maid", "侍女档案", "保护侧门路线", "门闩被旧令封死", "米拉后果写入地图"],
+  ["key", "钥匙档案", "追问卢卡去向", "钥匙齿缝渗出灰", "卢卡后果写入地图"],
+  ["glove", "白手档案", "核对礼官名单", "白手套名字被刮掉", "礼署后果写入地图"],
+  ["wax", "黑蜡档案", "测试切魂残渣", "蜡面浮出陌生掌纹", "黑日后果写入地图"],
+  ["trial", "庭审档案", "预演明日质询", "证词顺序自己错位", "庭审后果写入地图"],
+  ["exile", "离宫档案", "确认退路是否活着", "旧都路标被拔走", "流放后果写入地图"],
+  ["crown", "王冠档案", "衡量王权代价", "王冠内侧结霜", "铁冠后果写入地图"],
+  ["cat", "猫印档案", "确认猫印反应", "猫印拒绝被王印覆盖", "猫王女后果写入地图"],
+  ["zero", "零日档案", "追问空白日期", "月相表撕不掉那格", "零周目后果写入地图"],
+  ["sun", "黑日档案", "寻找幕后手影", "天窗墨迹提前下坠", "黑日后果写入地图"],
+  ["scribe", "书记档案", "保存老人记忆", "他忘掉第一名学生", "白审后果写入地图"],
+  ["bread", "面包档案", "保护小猫证物", "小爪印被人擦去", "小人物后果写入地图"],
+  ["gate", "宫门档案", "安排谁先通过", "门外暴雪开始倒吹", "宫门后果写入地图"],
+  ["dawn", "晨光档案", "留下下一日钩子", "钟声提前少一响", "晨光后果写入地图"],
+];
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -672,6 +699,86 @@ const campaignCalendarStory = Object.fromEntries(
           {
             speaker: "旁白",
             text: `回报：${reward}。下一钩子写入谎言地图。`,
+            next,
+          },
+        ],
+      ];
+    }),
+  ),
+);
+
+const campaignDossierStory = Object.fromEntries(
+  campaignDayTitles.flatMap((dayTitle, dayIndex) =>
+    dossierLines.flatMap(([lineId, lineName, objective, pressure, reward], lineIndex) => {
+      const day = String(dayIndex + 1).padStart(2, "0");
+      const nextLine = dossierLines[lineIndex + 1]?.[0];
+      const nextDay = String(dayIndex + 2).padStart(2, "0");
+      const base = `dossier_${day}_${lineId}`;
+      const next =
+        nextLine
+          ? `dossier_${day}_${nextLine}_goal`
+          : dayIndex + 1 < campaignDayTitles.length
+            ? `dossier_${nextDay}_throne_goal`
+            : "campaign_dossier_close";
+      return [
+        [
+          `${base}_goal`,
+          {
+            bg: lineIndex % 4 === 0 ? "throne" : lineIndex % 4 === 1 ? "entrance" : lineIndex % 4 === 2 ? "library" : "bed",
+            cg: `memoryCg${String(1 + ((dayIndex * dossierLines.length + lineIndex) % 59)).padStart(2, "0")}`,
+            cgMotion: lineIndex % 2 === 0 ? "libraryConfrontation" : "softOrder",
+            speaker: "旁白",
+            text: `第${dayIndex + 1}日·${lineName}：${objective}。`,
+            next: `${base}_pressure`,
+          },
+        ],
+        [
+          `${base}_pressure`,
+          {
+            speaker: "旁白",
+            text: `${dayTitle}追加阻力：${pressure}。`,
+            next: `${base}_choice`,
+          },
+        ],
+        [
+          `${base}_choice`,
+          {
+            choices: [
+              { label: "翻旧名", hint: "补上下文", effects: { observation: 1 }, next: `${base}_name` },
+              { label: "封证物", hint: "留下铁证", effects: { vigilance: 1 }, next: `${base}_seal` },
+              { label: "牵住她", hint: "保住温度", effects: { closeness: 1 }, next: `${base}_hand` },
+            ],
+          },
+        ],
+        [
+          `${base}_name`,
+          {
+            speaker: "塞德里克",
+            text: `${lineName}先翻旧名，谎言少一处躲法。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_seal`,
+          {
+            speaker: "安塔莉亚",
+            text: `${lineName}先封证物，明日就少一张假嘴。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_hand`,
+          {
+            speaker: "旁白",
+            text: `${lineName}先牵住她，黑蜡退回银铃里。`,
+            next: `${base}_reward`,
+          },
+        ],
+        [
+          `${base}_reward`,
+          {
+            speaker: "旁白",
+            text: `即时回报：${reward}。夜里又多一枚钩子。`,
             next,
           },
         ],
@@ -1440,6 +1547,24 @@ const story = {
     cgMotion: "libraryConfrontation",
     speaker: "旁白",
     text: "三十日战役日历合上。每一日都变成通往终局的线索。",
+    next: "campaign_dossier_open",
+  },
+  campaign_dossier_open: {
+    chapter: "三十日档案",
+    bg: "library",
+    cg: "memoryCg12",
+    cgMotion: "libraryConfrontation",
+    speaker: "旁白",
+    text: "战役日历翻到背面，昼夜双线档案展开。每条线都要补上下文。",
+    next: "dossier_01_throne_goal",
+  },
+  ...campaignDossierStory,
+  campaign_dossier_close: {
+    bg: "library",
+    cg: "memoryCg24",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "昼夜双线档案合拢。三十日里没有空白的一天。",
     next: "ch2_dawn",
   },
   ch2_dawn: {
@@ -3527,6 +3652,7 @@ const story = {
 const storySections = {
   "序章：献礼与开笼": ["throneGift", "catIntro", "softOrder", "openCage"],
   "三十日战役：长篇日历": ["memoryCg01", "memoryCg12", "memoryCg24", "memoryCg30"],
+  "三十日档案：昼夜双线": ["memoryCg02", "memoryCg12", "memoryCg24", "memoryCg48"],
   "第一章：早膳、救猫与议事厅": ["morningBreakfast", "saveCat", "councilSignal", "eveningFable"],
   "月圆夜：真身、禁书与对峙": ["moonCorridor", "humanReveal", "librarySpellbook", "libraryConfrontation"],
   "第二章：临时同盟与营地": ["truceLibrary", "refugeeCamp", "archiveLedger"],
@@ -3569,6 +3695,12 @@ const branchMap = [
     chapter: "三十日战役",
     title: "战役日历",
     prompt: "每日目标都要选择打法：问证人、压证物，或护住她。",
+  },
+  {
+    id: "dossier_01_throne_choice",
+    chapter: "三十日档案",
+    title: "昼夜双线",
+    prompt: "每条档案都要补上下文：翻旧名、封证物，或牵住她。",
   },
   {
     id: "ch2_choice_archive",

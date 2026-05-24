@@ -167,6 +167,16 @@ const requiredCampaignNodes = [
   "campaign_calendar_close",
 ];
 const missingCampaignNodes = requiredCampaignNodes.filter((id) => !visited.has(id));
+const requiredDossierNodes = [
+  "campaign_dossier_open",
+  "dossier_01_throne_goal",
+  "dossier_01_throne_choice",
+  "dossier_10_dream_reward",
+  "dossier_20_sun_reward",
+  "dossier_30_dawn_choice",
+  "campaign_dossier_close",
+];
+const missingDossierNodes = requiredDossierNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -190,6 +200,7 @@ const report = {
   routeLockNodes: requiredRouteLockNodes.length - missingRouteLockNodes.length,
   consequenceNodes: requiredConsequenceNodes.length - missingConsequenceNodes.length,
   campaignNodes: requiredCampaignNodes.length - missingCampaignNodes.length,
+  dossierNodes: requiredDossierNodes.length - missingDossierNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -208,6 +219,7 @@ if (missingTrialGauntletNodes.length) throw new Error(`Trial gauntlet nodes are 
 if (missingRouteLockNodes.length) throw new Error(`Route lock nodes are not reachable: ${missingRouteLockNodes.join(", ")}`);
 if (missingConsequenceNodes.length) throw new Error(`Consequence corridor nodes are not reachable: ${missingConsequenceNodes.join(", ")}`);
 if (missingCampaignNodes.length) throw new Error(`Campaign calendar nodes are not reachable: ${missingCampaignNodes.join(", ")}`);
+if (missingDossierNodes.length) throw new Error(`Campaign dossier nodes are not reachable: ${missingDossierNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));
