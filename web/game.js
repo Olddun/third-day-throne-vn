@@ -96,6 +96,65 @@ const trialRoundData = [
   ["终审顺序", "所有证据争着先上台", "谎言地图排出最后路"],
 ];
 
+const routeLockData = [
+  ["安塔莉亚", "夺回人形", "猫印又在发烫", "她承认自己想活"],
+  ["安塔莉亚", "救下族人", "俘虏席有人低头", "她把王女名让给活人"],
+  ["安塔莉亚", "找灭国真凶", "旧恨催她拔刀", "她先让证词说完"],
+  ["安塔莉亚", "拆掉金笼", "贵族献上新笼", "她亲手关上空笼"],
+  ["安塔莉亚", "确认弟弟生死", "墙中铃声很弱", "银铃线锁进终局"],
+  ["安塔莉亚", "守住自尊", "众人等她崩溃", "她站着念完整名"],
+  ["安塔莉亚", "决定去留", "旧都和王城同时喊她", "她把明天留给自己"],
+  ["安塔莉亚", "共同承担未来", "复仇仍在耳边", "她把刀放到证物旁"],
+  ["塞德里克", "坐稳王座", "王冠已经易手", "他学会先走在王冠前"],
+  ["塞德里克", "查清父王旧案", "幼年记忆又缺一块", "他承认自己怕真相"],
+  ["塞德里克", "保护活证", "摄政会催他退庭", "他把座位让给证人"],
+  ["塞德里克", "审判自己", "臣子等他脱罪", "他把手印放到红账上"],
+  ["塞德里克", "摆脱冷酷面具", "旧臣赞他无情", "他当众说出痛感"],
+  ["塞德里克", "回应她的信任", "王印逼他独断", "他把最后判断交给她"],
+  ["塞德里克", "承认少年伤口", "火场声逼近", "他没有再把哭声切掉"],
+  ["塞德里克", "让王国站起", "众人习惯跪着听令", "他命令所有人坐下"],
+  ["罗温", "维持军权", "北境军想堵门", "他撤掉自己的亲兵"],
+  ["罗温", "洗清屠城名", "旧兵逼他沉默", "他承认军队也该受审"],
+  ["罗温", "保护士兵", "证词会牵连北境", "他先保平民名字"],
+  ["罗温", "面对救人旧伤", "火海孩子在台下", "他交出救援军令"],
+  ["罗温", "放下粗暴忠诚", "他想用刀解决", "刀被放到证物桌下"],
+  ["罗温", "承认失败", "将军名号压着他", "他第一次向俘虏低头"],
+  ["罗温", "挡住假令", "军印仍被仿造", "他教米拉辨认真印"],
+  ["罗温", "接受新秩序", "北境席位要特权", "他把席位让给遗族"],
+  ["维克托", "保住贵族秩序", "账册正在反咬他", "他露出饥荒旧伤"],
+  ["维克托", "藏住账本秘密", "红账叫出他小名", "他承认第一笔假账"],
+  ["维克托", "把善恶说成成本", "旁听席开始动摇", "孩子名字打碎算法"],
+  ["维克托", "活着离场", "黑日许他新权力", "他迟疑了一息"],
+  ["维克托", "拖别人下水", "礼官名单压住他", "他供出白手套去向"],
+  ["维克托", "守住面具", "笑容开始裂开", "他第一次说自己饿过"],
+  ["维克托", "反扑审判", "贵族席暗递刀", "刀柄刻着摄政徽"],
+  ["维克托", "成为最终刽子手", "黑日影子等他点头", "拒绝或点头都会锁线"],
+  ["书记官", "让名字重现", "墨水开始失色", "他用血补上姓氏"],
+  ["书记官", "弥补旧仪式", "记忆税还在追他", "他献出第一段学生名"],
+  ["书记官", "从记录者变证人", "旁听席质疑老人", "他站到证人席中央"],
+  ["书记官", "保住最后末页", "纸页想自燃", "他把末页贴上胸口"],
+  ["书记官", "揭开零周目", "月相表反复改日", "空白日锁进隐藏线"],
+  ["书记官", "承认沉默罪", "学生脸庞消失", "他写下自己的罪名"],
+  ["书记官", "交出记忆钥匙", "钥匙在掌心生锈", "他把锈屑撒进王印"],
+  ["书记官", "选择见证终局", "身体快撑不住", "他请米拉替他读完"],
+  ["米拉", "保护小人物", "贵族笑她越位", "她把药车账本摊开"],
+  ["米拉", "在夹缝活下去", "侧门路会暴露她", "她仍然画出逃生线"],
+  ["米拉", "打开宫门", "门闩压着旧令", "她让孩子先走过去"],
+  ["米拉", "摆脱绝对服从", "侍女规矩压低她", "她没有再跪下回话"],
+  ["米拉", "保住药车证人", "药草被换成毒叶", "她闻出苦杏味"],
+  ["米拉", "夺回家人名字", "粮道旧案翻出她家", "她把姓氏写回门牌"],
+  ["米拉", "递出逃生路", "王宫门外是暴雪", "她点亮第三盏灯"],
+  ["米拉", "成为关键行动者", "所有人等国王下令", "她先推开门"],
+  ["卢卡", "被王看见", "钥匙在袖中发抖", "他承认自己嫉妒"],
+  ["卢卡", "摆脱底层身份", "贵族许他新姓", "他撕掉那张契约"],
+  ["卢卡", "补偿告发旧罪", "旧同伴盯着他", "他把自己推上证人席"],
+  ["卢卡", "守住侧门", "假令逼他开锁", "他把钥匙折成两段"],
+  ["卢卡", "救被转走的孩子", "药车只剩一条路", "他钻进车底带路"],
+  ["卢卡", "承认怨恨", "怨恨想替他动手", "他把刀交给米拉"],
+  ["卢卡", "拒绝政变诱饵", "新主子叫他大人", "他笑得很难看"],
+  ["卢卡", "成为可信证人", "全场记得他偷过钥匙", "他仍说出真门号"],
+];
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -270,6 +329,92 @@ const trialGauntletStory = Object.fromEntries(
           speaker: "旁白",
           text: `${reward}。谎言地图亮起下一枚钉子。`,
           next: nextRound,
+        },
+      ],
+    ];
+  }),
+);
+
+const routeLockStory = Object.fromEntries(
+  routeLockData.flatMap(([actor, desire, pressure, payoff], index) => {
+    const number = String(index + 1).padStart(2, "0");
+    const nextNumber = String(index + 2).padStart(2, "0");
+    const base = `route_lock_${number}`;
+    const nextRoute = index + 1 < routeLockData.length ? `route_lock_${nextNumber}_goal` : "route_lock_close";
+    const bg = index % 4 === 0 ? "council" : index % 4 === 1 ? "library" : index % 4 === 2 ? "entrance" : "bed";
+    const cg = `memoryCg${String(1 + (index % 59)).padStart(2, "0")}`;
+    const actorKey =
+      actor === "罗温"
+        ? "大将军"
+        : actor === "维克托"
+          ? "大臣"
+          : actor === "书记官"
+            ? "老书记官"
+            : actor === "米拉"
+              ? "侍女"
+              : actor === "卢卡"
+                ? "侍从"
+                : actor;
+    return [
+      [
+        `${base}_goal`,
+        {
+          bg,
+          cg,
+          cgMotion: index % 2 === 0 ? "moonCorridor" : "libraryConfrontation",
+          speaker: "旁白",
+          text: `路线锁${index + 1}：${actor}想要${desire}。`,
+          next: `${base}_pressure`,
+        },
+      ],
+      [
+        `${base}_pressure`,
+        {
+          speaker: actorKey,
+          text: pressure,
+          next: `${base}_choice`,
+        },
+      ],
+      [
+        `${base}_choice`,
+        {
+          choices: [
+            { label: "接伤口", hint: "承认代价", effects: { closeness: 1 }, next: `${base}_wound` },
+            { label: "拆面具", hint: "逼出真话", effects: { observation: 1 }, next: `${base}_mask` },
+            { label: "给去路", hint: "放手推进", effects: { vigilance: 1 }, next: `${base}_path` },
+          ],
+        },
+      ],
+      [
+        `${base}_wound`,
+        {
+          speaker: "塞德里克",
+          text: `${actor}的伤口被接住，证词少了一层刺。`,
+          next: `${base}_payoff`,
+        },
+      ],
+      [
+        `${base}_mask`,
+        {
+          speaker: "安塔莉亚",
+          text: `${actor}的面具裂开，藏在后面的目的露出来。`,
+          next: `${base}_payoff`,
+        },
+      ],
+      [
+        `${base}_path`,
+        {
+          speaker: "旁白",
+          text: `${actor}得到一条去路，也留下一个必须承担的名字。`,
+          next: `${base}_payoff`,
+        },
+      ],
+      [
+        `${base}_payoff`,
+        {
+          speaker: "旁白",
+          text: `${payoff}。一条结局线被锁进分支树。`,
+          next: nextRoute,
         },
       ],
     ];
@@ -2593,6 +2738,24 @@ const story = {
     cgMotion: "softOrder",
     speaker: "旁白",
     text: "二十四轮攻防结束，审判厅安静下来。真凶终于没有旁枝可躲。",
+    next: "route_lock_open",
+  },
+  route_lock_open: {
+    chapter: "终局前夜",
+    bg: "council",
+    cg: "memoryCg54",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "证据已经到齐。接下来要决定每个人把真相带向哪里。",
+    next: "route_lock_01_goal",
+  },
+  ...routeLockStory,
+  route_lock_close: {
+    bg: "throne",
+    cg: "memoryCg50",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "所有路线锁定完毕。王座、旧都、流放、黑日，都在等玩家亲手点亮。",
     next: "ch5_public_truth",
   },
   ch5_public_truth: {
@@ -3075,6 +3238,7 @@ const storySections = {
   "第八章：审判前夜潜入": ["refugeeCamp", "archiveLedger", "councilSignal", "infirmaryAftermath"],
   "第九章：失位与崩解": ["palaceCoup", "infirmaryAftermath", "memoryCg40", "memoryCg59"],
   "第九章：公开审判攻防": ["memoryCg30", "memoryCg41", "memoryCg53"],
+  "终局前夜：路线锁定": ["memoryCg01", "memoryCg28", "memoryCg50", "memoryCg54"],
   "终章：政变、破咒与自由": ["infirmaryAftermath", "finalRitual", "sunriseEnding"],
 };
 
@@ -3162,6 +3326,12 @@ const branchMap = [
     chapter: "第九章",
     title: "审判攻防",
     prompt: "每轮证据都要选打法：追名字、压证物，或护住证人。",
+  },
+  {
+    id: "route_lock_01_choice",
+    chapter: "终局前夜",
+    title: "路线锁定",
+    prompt: "每个角色都要面对伤口、面具和去路，终局因此分叉。",
   },
   {
     id: "ch5_choice_end",

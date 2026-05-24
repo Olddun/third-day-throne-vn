@@ -134,6 +134,18 @@ const requiredTrialGauntletNodes = [
   "trial_gauntlet_close",
 ];
 const missingTrialGauntletNodes = requiredTrialGauntletNodes.filter((id) => !visited.has(id));
+const requiredRouteLockNodes = [
+  "route_lock_open",
+  "route_lock_01_goal",
+  "route_lock_01_choice",
+  "route_lock_08_payoff",
+  "route_lock_16_payoff",
+  "route_lock_32_payoff",
+  "route_lock_48_payoff",
+  "route_lock_56_choice",
+  "route_lock_close",
+];
+const missingRouteLockNodes = requiredRouteLockNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -154,6 +166,7 @@ const report = {
   trialEveNodes: requiredTrialEveNodes.length - missingTrialEveNodes.length,
   collapseNodes: requiredCollapseNodes.length - missingCollapseNodes.length,
   trialGauntletNodes: requiredTrialGauntletNodes.length - missingTrialGauntletNodes.length,
+  routeLockNodes: requiredRouteLockNodes.length - missingRouteLockNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -169,6 +182,7 @@ if (missingBadIntelNodes.length) throw new Error(`Bad ending intel nodes are not
 if (missingTrialEveNodes.length) throw new Error(`Trial eve nodes are not reachable: ${missingTrialEveNodes.join(", ")}`);
 if (missingCollapseNodes.length) throw new Error(`Collapse nodes are not reachable: ${missingCollapseNodes.join(", ")}`);
 if (missingTrialGauntletNodes.length) throw new Error(`Trial gauntlet nodes are not reachable: ${missingTrialGauntletNodes.join(", ")}`);
+if (missingRouteLockNodes.length) throw new Error(`Route lock nodes are not reachable: ${missingRouteLockNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));
