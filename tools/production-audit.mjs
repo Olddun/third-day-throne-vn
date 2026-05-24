@@ -107,6 +107,23 @@ const requiredTrialEveNodes = [
   "trial_eve_last_hook",
 ];
 const missingTrialEveNodes = requiredTrialEveNodes.filter((id) => !visited.has(id));
+const requiredCollapseNodes = [
+  "collapse_open",
+  "collapse_choice_first",
+  "collapse_wagon",
+  "collapse_hold_antalia",
+  "collapse_take_hall",
+  "collapse_choice_memory",
+  "collapse_use_cedric",
+  "collapse_use_scribe",
+  "collapse_use_bell",
+  "collapse_choice_enter",
+  "collapse_enter_now",
+  "collapse_finish_page",
+  "collapse_enter_together",
+  "collapse_enter_join",
+];
+const missingCollapseNodes = requiredCollapseNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -125,6 +142,7 @@ const report = {
   lieMapNodes: requiredLieMapNodes.length - missingLieMapNodes.length,
   badEndingIntelNodes: requiredBadIntelNodes.length - missingBadIntelNodes.length,
   trialEveNodes: requiredTrialEveNodes.length - missingTrialEveNodes.length,
+  collapseNodes: requiredCollapseNodes.length - missingCollapseNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -138,6 +156,7 @@ if (missingWolfNodes.length) throw new Error(`Closed court suspicion nodes are n
 if (missingLieMapNodes.length) throw new Error(`Lie map nodes are not reachable: ${missingLieMapNodes.join(", ")}`);
 if (missingBadIntelNodes.length) throw new Error(`Bad ending intel nodes are not reachable: ${missingBadIntelNodes.join(", ")}`);
 if (missingTrialEveNodes.length) throw new Error(`Trial eve nodes are not reachable: ${missingTrialEveNodes.join(", ")}`);
+if (missingCollapseNodes.length) throw new Error(`Collapse nodes are not reachable: ${missingCollapseNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));

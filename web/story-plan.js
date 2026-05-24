@@ -90,6 +90,12 @@ const experienceDeck = [
     timing: "第九章",
   },
   {
+    id: "crownless_pressure",
+    name: "失位压力连锁",
+    role: "王位被夺后，让玩家在证人、人形、审判厅和记忆代价之间连选。",
+    timing: "第九章",
+  },
+  {
     id: "branch_locked_revelation",
     name: "路线锁真相",
     role: "不同结局开放不同幕后证据，驱动玩家追全结局。",
@@ -273,12 +279,15 @@ const branchPoints = [
   { id: "bp09_lie_map", act: "第七章", question: "谎言地图第一枚钉子落在哪条证据上？", options: ["军令", "蜡封", "钥匙", "月相"] },
   { id: "bp10_trial_eve", act: "第八章", question: "天亮前兑现哪条失败暗号？", options: ["北门七", "王寝门", "礼官册", "黑蜡"] },
   { id: "bp11_court_tool", act: "第八章", question: "只能带一种筹码上庭，带证人、名单，还是先保她？", options: ["带证人", "带名单", "带她走"] },
-  { id: "bp12_trial", act: "第八章", question: "公开真相，还是先保护证人？", options: ["公审", "密审", "逃离"] },
-  { id: "bp13_coup", act: "第九章", question: "政变夜救王座、救她、救民众？", options: ["守殿", "追她", "开门"] },
-  { id: "bp14_sacrifice", act: "第九章", question: "谁承受记忆回流？", options: ["塞德里克", "安塔莉亚", "书记官"] },
-  { id: "bp15_exile", act: "第九章", question: "失去王位后回宫，还是去旧都？", options: ["回宫", "旧都", "北境"] },
-  { id: "bp16_final_ritual", act: "终章", question: "破咒方式决定人、国、记忆的取舍。", options: ["王血", "猫印", "双魂"] },
-  { id: "bp17_gate", act: "终章", question: "终局之后留下、远走、或重启周目？", options: ["留下", "远走", "重启"] },
+  { id: "bp12_crownless", act: "第九章", question: "王位被夺后，先追药车、扶住她，还是夺厅门？", options: ["追药车", "扶住她", "夺厅门"] },
+  { id: "bp13_red_page", act: "第九章", question: "红账末页要用谁的记忆作价？", options: ["王忆", "旧伤", "银铃"] },
+  { id: "bp14_enter_trial", act: "第九章", question: "证据、人形和时间同时崩坏时，怎样入庭？", options: ["入庭", "补页", "扶她"] },
+  { id: "bp15_trial", act: "第九章", question: "公开真相，还是先保护证人？", options: ["公审", "密审", "逃离"] },
+  { id: "bp16_coup", act: "第九章", question: "政变夜救王座、救她、救民众？", options: ["守殿", "追她", "开门"] },
+  { id: "bp17_sacrifice", act: "第九章", question: "谁承受记忆回流？", options: ["塞德里克", "安塔莉亚", "书记官"] },
+  { id: "bp18_exile", act: "第九章", question: "失去王位后回宫，还是去旧都？", options: ["回宫", "旧都", "北境"] },
+  { id: "bp19_final_ritual", act: "终章", question: "破咒方式决定人、国、记忆的取舍。", options: ["王血", "猫印", "双魂"] },
+  { id: "bp20_gate", act: "终章", question: "终局之后留下、远走、或重启周目？", options: ["留下", "远走", "重启"] },
 ];
 
 const endings = [
