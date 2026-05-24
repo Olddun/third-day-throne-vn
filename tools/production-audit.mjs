@@ -86,6 +86,13 @@ const requiredLieMapNodes = [
   "lie_map_join",
 ];
 const missingLieMapNodes = requiredLieMapNodes.filter((id) => !visited.has(id));
+const requiredBadIntelNodes = [
+  "bad_ledger_password",
+  "bad_cage_password",
+  "bad_empty_bed_password",
+  "bad_black_sun_password",
+];
+const missingBadIntelNodes = requiredBadIntelNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -102,6 +109,7 @@ const report = {
   midpointReversalNodes: requiredMidpointNodes.length - missingMidpointNodes.length,
   closedCourtNodes: requiredWolfNodes.length - missingWolfNodes.length,
   lieMapNodes: requiredLieMapNodes.length - missingLieMapNodes.length,
+  badEndingIntelNodes: requiredBadIntelNodes.length - missingBadIntelNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -111,6 +119,7 @@ if (longformPlan.cgPlan.length < 80) throw new Error(`Need 80+ planned CGs, foun
 if (missingMidpointNodes.length) throw new Error(`Midpoint reversal nodes are not reachable: ${missingMidpointNodes.join(", ")}`);
 if (missingWolfNodes.length) throw new Error(`Closed court suspicion nodes are not reachable: ${missingWolfNodes.join(", ")}`);
 if (missingLieMapNodes.length) throw new Error(`Lie map nodes are not reachable: ${missingLieMapNodes.join(", ")}`);
+if (missingBadIntelNodes.length) throw new Error(`Bad ending intel nodes are not reachable: ${missingBadIntelNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));
