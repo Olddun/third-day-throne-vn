@@ -155,6 +155,73 @@ const routeLockData = [
   ["卢卡", "成为可信证人", "全场记得他偷过钥匙", "他仍说出真门号"],
 ];
 
+const consequenceData = [
+  ["刑台雪声", "处决令被延迟", "军心不稳但活口留下"],
+  ["金丝笼门", "笼门早早打开", "猫形敌意变成第一份信任"],
+  ["王印黑痕", "证物被公开", "旧王的影子开始退潮"],
+  ["枕下银戒", "梦境缺口保留", "塞德里克能追到少年火场"],
+  ["早膳试探", "她看见温柔的伪装", "亲密线获得第一处软点"],
+  ["喷泉小猫", "面包活下来", "米拉线获得公开证人"],
+  ["议事地图", "粮道被标出", "维克托账术少一块遮布"],
+  ["夜读寓言", "旧故事被她听见", "安塔莉亚不再只用沉默防守"],
+  ["月廊真身", "人形被看见", "王宫从养猫谎言转入共犯线"],
+  ["禁书残页", "切魂术浮现", "中点反转提前埋下钩子"],
+  ["书库对峙", "逼问没有失控", "双方都知道自己会伤到对方"],
+  ["同盟契约", "残卷背面签名", "结局群能调用同盟证据"],
+  ["北门营地", "孩子名字被保住", "公开审判多一排活证人"],
+  ["隐藏粮仓", "仓号进入地图", "坏结局暗号变成主线钥匙"],
+  ["红账封存", "账册没有被烧尽", "白色审判线提前亮起"],
+  ["账页焚灰", "灰烬拼出仓号", "失败也给下一轮路标"],
+  ["闭锁长桌", "第一轮指认发生", "宫廷狼人杀变成主玩法"],
+  ["将军雪印", "军令真假分离", "罗温弧光能从刀转向证词"],
+  ["大臣袖蜡", "第四蜡封露出", "维克托无法只靠账术脱身"],
+  ["书记旧伤", "月相伤口公开", "零周目不再只是传说"],
+  ["米拉宫门", "侧门路线被画出", "小人物线可进入终局"],
+  ["卢卡缺钥", "钥匙怨恨被承认", "侍从背叛线获得回头路"],
+  ["旧都月门", "废墟被重新命名", "旧都结局获得情绪根"],
+  ["旧都落雪", "复国想象出现", "离宫路线有了可去之地"],
+  ["地下祭坛", "王印术式显形", "真凶从人变成系统"],
+  ["幼王火场", "少年伤口归位", "塞德里克能审判自己"],
+  ["幼女断铃", "弟弟线被听见", "银铃结局打开墙中证词"],
+  ["假胜利印", "小印落出幼名", "玩家预期被中点翻转"],
+  ["公开审判", "证据登上台阶", "活人终于能当众作证"],
+  ["密审灯影", "暗线保留", "黑日结局多一层幕后手"],
+  ["毒茶证词", "茶盏被截下", "证人线免于突然断裂"],
+  ["王宫政变", "王位失守", "失位崩解成为真正低谷"],
+  ["北境军阵", "假令被拆", "军方坐大线能被控制"],
+  ["燃烧书库", "残页被救出", "书记官牺牲有了必要性"],
+  ["伤后礼拜", "她替他包扎", "亲密线承认彼此脆弱"],
+  ["人形崩解", "黑蜡护住影子", "扶她上台成为终局选项"],
+  ["放逐夜路", "离宫路线保留", "再见国王结局有前因"],
+  ["北境望楼", "将军让出席位", "北境刀声变成可避免坏线"],
+  ["记忆回流", "代价被看见", "王忆、旧伤、银铃各自锁线"],
+  ["书记献忆", "名字重新出现", "白色审判结局获得代价"],
+  ["猫印觉醒", "她能站着说话", "猫王女复国线亮起"],
+  ["王血术式", "王冠不再免责", "铁王冠线有孤独代价"],
+  ["双魂仪式", "两份名字合上", "双王座线获得条件"],
+  ["黑日坠殿", "幕后手影显形", "黑日坏结局给最终暗号"],
+  ["沉默金笼", "她活着但失声", "控制线转向坏结局警告"],
+  ["铁冠孤影", "国家压过私情", "普通结局保留痛感"],
+  ["猫王复国", "旧都钟声响起", "她不再只被王城定义"],
+  ["双王晨议", "共治从反对开始", "金色结局需要公开异议"],
+  ["白猫之约", "留下和离开都自由", "真结局保留她的自主"],
+  ["零周目信", "失败拼成来信", "多周目动力被保留"],
+  ["空床银戒", "亲密线断裂", "黑蜡暗号提醒保住人形"],
+  ["宫门米拉", "侍女打开路", "米拉结局从行动长出来"],
+  ["旧都新家", "王位换成家", "流放线获得温柔落点"],
+  ["再见国王", "王名被放下", "塞德里克能离开王座"],
+  ["无月庭院", "月相失败", "零周目日期会反噬"],
+  ["北境刀声", "军权失衡", "罗温线若忽视会成坏结局"],
+  ["侍从钥匙", "怨恨开门", "卢卡线需要被看见"],
+  ["白色审判", "名单被念完", "书记官记忆换来结局"],
+  ["王冠空座", "摄政会动手", "失位后玩家仍能推进真相"],
+  ["审判长链", "二十四轮攻防完成", "真凶失去旁枝"],
+  ["路线锁定", "人物弧光归位", "结局入口不再是孤立菜单"],
+  ["谎言地图", "选择带着语境回放", "分支树成为玩家的战利品"],
+  ["双手开门", "她和他同时推门", "真结局保留共同承担"],
+  ["最后晨光", "所有代价排成路", "下一步只剩亲手点亮结局"],
+];
+
 const assets = {
   backgrounds: {
     throne: "./assets/backgrounds/throne_hall.png",
@@ -415,6 +482,70 @@ const routeLockStory = Object.fromEntries(
           speaker: "旁白",
           text: `${payoff}。一条结局线被锁进分支树。`,
           next: nextRoute,
+        },
+      ],
+    ];
+  }),
+);
+
+const consequenceCorridorStory = Object.fromEntries(
+  consequenceData.flatMap(([title, context, payoff], index) => {
+    const number = String(index + 1).padStart(2, "0");
+    const nextNumber = String(index + 2).padStart(2, "0");
+    const base = `consequence_${number}`;
+    const next = index + 1 < consequenceData.length ? `consequence_${nextNumber}_context` : "consequence_corridor_close";
+    return [
+      [
+        `${base}_context`,
+        {
+          bg: index % 4 === 0 ? "throne" : index % 4 === 1 ? "council" : index % 4 === 2 ? "library" : "entrance",
+          cg: `memoryCg${String(1 + (index % 59)).padStart(2, "0")}`,
+          cgMotion: index % 2 === 0 ? "softOrder" : "moonCorridor",
+          speaker: "旁白",
+          text: `后果回廊${index + 1}：${title}。${context}。`,
+          next: `${base}_choice`,
+        },
+      ],
+      [
+        `${base}_choice`,
+        {
+          choices: [
+            { label: "收证据", hint: "放进分支树", effects: { observation: 1 }, next: `${base}_proof` },
+            { label: "稳人心", hint: "让人站住", effects: { closeness: 1 }, next: `${base}_heart` },
+            { label: "开暗线", hint: "留给周目", effects: { vigilance: 1 }, next: `${base}_shadow` },
+          ],
+        },
+      ],
+      [
+        `${base}_proof`,
+        {
+          speaker: "塞德里克",
+          text: `${title}成为证据，分支树补上一句上下文。`,
+          next: `${base}_payoff`,
+        },
+      ],
+      [
+        `${base}_heart`,
+        {
+          speaker: "安塔莉亚",
+          text: `${title}先交给活人。结局不能只照顾王座。`,
+          next: `${base}_payoff`,
+        },
+      ],
+      [
+        `${base}_shadow`,
+        {
+          speaker: "旁白",
+          text: `${title}留下暗线。失败周目也会记住它。`,
+          next: `${base}_payoff`,
+        },
+      ],
+      [
+        `${base}_payoff`,
+        {
+          speaker: "旁白",
+          text: `${payoff}。下一扇结局门亮起边框。`,
+          next,
         },
       ],
     ];
@@ -2890,6 +3021,24 @@ const story = {
   final_close: {
     speaker: "旁白",
     text: "塞德里克笑了。那笑意卸下王座的重量，像一个终于学会开门的人，在日光里松了一口气。",
+    next: "consequence_corridor_open",
+  },
+  consequence_corridor_open: {
+    chapter: "终局回顾",
+    bg: "throne",
+    cg: "memoryCg50",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "进入结局群前，谎言地图展开成回廊。每一步都要确认它改变了什么。",
+    next: "consequence_01_context",
+  },
+  ...consequenceCorridorStory,
+  consequence_corridor_close: {
+    bg: "throne",
+    cg: "memoryCg54",
+    cgMotion: "softOrder",
+    speaker: "旁白",
+    text: "后果回廊走到尽头。现在，结局成了玩家亲手铺出的路。",
     next: "result",
   },
   result: {
@@ -3239,6 +3388,7 @@ const storySections = {
   "第九章：失位与崩解": ["palaceCoup", "infirmaryAftermath", "memoryCg40", "memoryCg59"],
   "第九章：公开审判攻防": ["memoryCg30", "memoryCg41", "memoryCg53"],
   "终局前夜：路线锁定": ["memoryCg01", "memoryCg28", "memoryCg50", "memoryCg54"],
+  "终局回顾：后果回廊": ["memoryCg12", "memoryCg36", "memoryCg50", "memoryCg54"],
   "终章：政变、破咒与自由": ["infirmaryAftermath", "finalRitual", "sunriseEnding"],
 };
 
@@ -3332,6 +3482,12 @@ const branchMap = [
     chapter: "终局前夜",
     title: "路线锁定",
     prompt: "每个角色都要面对伤口、面具和去路，终局因此分叉。",
+  },
+  {
+    id: "consequence_01_choice",
+    chapter: "终局回顾",
+    title: "后果回廊",
+    prompt: "每段旧选择都要确认后果：收证据、稳人心，或开暗线。",
   },
   {
     id: "ch5_choice_end",
