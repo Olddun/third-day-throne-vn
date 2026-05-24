@@ -93,6 +93,20 @@ const requiredBadIntelNodes = [
   "bad_black_sun_password",
 ];
 const missingBadIntelNodes = requiredBadIntelNodes.filter((id) => !visited.has(id));
+const requiredTrialEveNodes = [
+  "trial_eve_open",
+  "trial_eve_choice",
+  "eve_warehouse_payoff",
+  "eve_bedroom_payoff",
+  "eve_glove_payoff",
+  "eve_wax_payoff",
+  "trial_eve_cost_choice",
+  "eve_take_witness",
+  "eve_take_list",
+  "eve_take_antalia",
+  "trial_eve_last_hook",
+];
+const missingTrialEveNodes = requiredTrialEveNodes.filter((id) => !visited.has(id));
 const storyText = JSON.stringify(story);
 
 const report = {
@@ -110,6 +124,7 @@ const report = {
   closedCourtNodes: requiredWolfNodes.length - missingWolfNodes.length,
   lieMapNodes: requiredLieMapNodes.length - missingLieMapNodes.length,
   badEndingIntelNodes: requiredBadIntelNodes.length - missingBadIntelNodes.length,
+  trialEveNodes: requiredTrialEveNodes.length - missingTrialEveNodes.length,
   status: minutes >= 1200 && Object.keys(assets.cg).length >= 80 ? "production target met" : "production gap remains",
 };
 
@@ -120,6 +135,7 @@ if (missingMidpointNodes.length) throw new Error(`Midpoint reversal nodes are no
 if (missingWolfNodes.length) throw new Error(`Closed court suspicion nodes are not reachable: ${missingWolfNodes.join(", ")}`);
 if (missingLieMapNodes.length) throw new Error(`Lie map nodes are not reachable: ${missingLieMapNodes.join(", ")}`);
 if (missingBadIntelNodes.length) throw new Error(`Bad ending intel nodes are not reachable: ${missingBadIntelNodes.join(", ")}`);
+if (missingTrialEveNodes.length) throw new Error(`Trial eve nodes are not reachable: ${missingTrialEveNodes.join(", ")}`);
 if (/不是|而是/.test(storyText)) throw new Error("Story still contains banned not-but phrasing");
 
 console.log(JSON.stringify(report, null, 2));

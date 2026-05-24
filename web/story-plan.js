@@ -96,6 +96,12 @@ const experienceDeck = [
     timing: "结局群",
   },
   {
+    id: "bad_code_cash_in",
+    name: "失败暗号兑现",
+    role: "把坏结局获得的仓号、敲法、黑蜡和白手套名单变成主线行动。",
+    timing: "审判前夜",
+  },
+  {
     id: "cg_as_scene_reward",
     name: "CG 承担戏剧瞬间",
     role: "关键人物出场、亲密推进、坏结局、反转揭露都必须有 CG。",
@@ -264,12 +270,15 @@ const branchPoints = [
   { id: "bp06_camp", act: "第五章", question: "先救活人还是先拿证据？", options: ["救营", "查账", "跟踪"] },
   { id: "bp07_wolf", act: "第五章", question: "宫廷狼人杀第一轮指认谁？", options: ["将军", "大臣", "侍从", "书记官"] },
   { id: "bp08_memory", act: "第六章", question: "恢复塞德里克记忆，还是先保安塔莉亚人形？", options: ["取回", "封住"] },
-  { id: "bp09_trial", act: "第六章", question: "公开真相，还是先保护证人？", options: ["公审", "密审", "逃离"] },
-  { id: "bp10_coup", act: "第七章", question: "政变夜救王座、救她、救民众？", options: ["守殿", "追她", "开门"] },
-  { id: "bp11_sacrifice", act: "第八章", question: "谁承受记忆回流？", options: ["塞德里克", "安塔莉亚", "书记官"] },
-  { id: "bp12_exile", act: "第九章", question: "失去王位后回宫，还是去旧都？", options: ["回宫", "旧都", "北境"] },
-  { id: "bp13_final_ritual", act: "终章", question: "破咒方式决定人、国、记忆的取舍。", options: ["王血", "猫印", "双魂"] },
-  { id: "bp14_gate", act: "终章", question: "终局之后留下、远走、或重启周目？", options: ["留下", "远走", "重启"] },
+  { id: "bp09_lie_map", act: "第七章", question: "谎言地图第一枚钉子落在哪条证据上？", options: ["军令", "蜡封", "钥匙", "月相"] },
+  { id: "bp10_trial_eve", act: "第八章", question: "天亮前兑现哪条失败暗号？", options: ["北门七", "王寝门", "礼官册", "黑蜡"] },
+  { id: "bp11_court_tool", act: "第八章", question: "只能带一种筹码上庭，带证人、名单，还是先保她？", options: ["带证人", "带名单", "带她走"] },
+  { id: "bp12_trial", act: "第八章", question: "公开真相，还是先保护证人？", options: ["公审", "密审", "逃离"] },
+  { id: "bp13_coup", act: "第九章", question: "政变夜救王座、救她、救民众？", options: ["守殿", "追她", "开门"] },
+  { id: "bp14_sacrifice", act: "第九章", question: "谁承受记忆回流？", options: ["塞德里克", "安塔莉亚", "书记官"] },
+  { id: "bp15_exile", act: "第九章", question: "失去王位后回宫，还是去旧都？", options: ["回宫", "旧都", "北境"] },
+  { id: "bp16_final_ritual", act: "终章", question: "破咒方式决定人、国、记忆的取舍。", options: ["王血", "猫印", "双魂"] },
+  { id: "bp17_gate", act: "终章", question: "终局之后留下、远走、或重启周目？", options: ["留下", "远走", "重启"] },
 ];
 
 const endings = [
@@ -427,6 +436,12 @@ const funCheckpoints = [
     promise: "坏结局必须给新情报、新 CG 或新路线暗号。",
     playerQuestion: "我失败了，但下一轮知道了什么？",
     failCondition: "如果坏结局只是惩罚，删掉或补情报奖励。",
+  },
+  {
+    id: "bad_code_payoff",
+    promise: "失败暗号要在主线里兑现，玩家能亲手把失败变成突破。",
+    playerQuestion: "上一轮死出来的线索，这次能打开哪扇门？",
+    failCondition: "如果暗号只停在结局文本里，这段不能验收。",
   },
   {
     id: "romance_pressure",
